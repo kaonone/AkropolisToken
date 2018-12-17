@@ -14,8 +14,8 @@ contract AkropolisToken is AkropolisBaseToken, Pausable, Lockable {
 
     /** Events */
 
-    constructor (address _balances, address _allowances, string _name, uint8 _decimals, string _symbol) public 
-    AkropolisBaseToken(_balances, _allowances, _name, _decimals, _symbol) {}
+    constructor (address _balances, address _allowances) public 
+    AkropolisBaseToken(_balances, _allowances) {}
 
     /** Modifiers **/
 
