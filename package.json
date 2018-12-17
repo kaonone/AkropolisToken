@@ -1,6 +1,6 @@
 {
-  "name": "upgradeableerc20",
-  "version": "1.0.0",
+  "name": "AkropolisToken",
+  "version": "1.0.1-c",
   "description": "",
   "main": "truffle-config.js",
   "directories": {
@@ -8,8 +8,6 @@
   },
   "scripts": {
     "test-storage": "truffle test ./test/tokenstorage.test.js",
-    "test-token-v0": "truffle test ./test/token_v0.test.js",
-    "test-token-v1": "truffle test ./test/token_v1.test.js",
     "test-proxy": "truffle test ./test/tokenproxy.test.js",
     "test-ownable": "truffle test ./test/Ownable.test.js",
     "test-pausable": "truffle test ./test/Pausable.test.js",
