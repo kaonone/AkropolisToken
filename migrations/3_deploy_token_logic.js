@@ -1,6 +1,5 @@
 var AkropolisToken = artifacts.require("./AkropolisToken.sol");
 
-
 module.exports = function(deployer, network, accounts) {
   const ZERO_ADDRESS = 0x0000000000000000000000000000000000000000;
   let owner = accounts[0];

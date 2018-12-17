@@ -4,16 +4,13 @@ import './AkropolisBaseToken.sol';
 import "../helpers/Lockable.sol";
 import "../helpers/Pausable.sol";
 
-
 /**
 * @title AkropolisToken
 * @notice Adds pausability and disables approve() to defend against double-spend attacks in addition
 * to inherited AkropolisBaseToken behavior
 */
-
 contract AkropolisToken is AkropolisBaseToken, Pausable, Lockable {
     using SafeMath for uint256;
-
 
     /** Events */
 
