@@ -13,11 +13,6 @@ import '../helpers/Ownable.sol';
 contract AkropolisBaseToken is ERC20, TokenStorage, Ownable {
     using SafeMath for uint256;
 
-
-    string public name = "Akropolis";                   
-    uint8 public decimals = "18";                
-    string public symbol = "AKT";
-
     /** Events */
     event Mint(address indexed to, uint256 value);
     event Burn(address indexed burner, uint256 value);
