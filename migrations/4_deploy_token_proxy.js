@@ -6,6 +6,6 @@ var AllowanceSheet = artifacts.require("./AllowanceSheet.sol");
 module.exports = function(deployer, network, accounts) {
   let owner = accounts[0];
   console.log('owner of proxy contract: ' + owner)
-  deployer.deploy(TokenProxy, AkropolisToken.address, BalanceSheet.address, AllowanceSheet.address, {from:owner});
+  deployer.deploy(TokenProxy, AkropolisToken.address, BalanceSheet.address, AllowanceSheet.address, "Akropolis", 18, "AKT", {from:owner});
 
 };

@@ -13,10 +13,6 @@ import '../helpers/Ownable.sol';
 contract AkropolisBaseToken is ERC20, TokenStorage, Ownable {
     using SafeMath for uint256;
 
-    string public name;                   
-    uint8 public decimals;                
-    string public symbol;
-
     /** Events */
     event Mint(address indexed to, uint256 value);
     event Burn(address indexed burner, uint256 value);
@@ -24,12 +20,8 @@ contract AkropolisBaseToken is ERC20, TokenStorage, Ownable {
     event Approval(address indexed owner, address indexed spender, uint256 value);
 
 
-    constructor (address _balances, address _allowances, string _name, uint8 _decimals, string _symbol) public 
-    TokenStorage(_balances, _allowances) {
-        name = _name;
-        decimals = _decimals;
-        symbol = _symbol;
-    }
+    constructor (address _balances, address _allowances) public 
+    TokenStorage(_balances, _allowances) {}
 
     /** Modifiers **/
 
@@ -93,6 +85,7 @@ contract AkropolisBaseToken is ERC20, TokenStorage, Ownable {
     function totalSupply() public view returns (uint256) {
         return balances.totalSupply();
     }
+
 
     /** Internal functions **/
 

@@ -9,9 +9,18 @@ import '../helpers/Ownable.sol';
 * @notice A proxy contract that serves the latest implementation of TokenProxy.
 */
 contract TokenProxy is UpgradeabilityProxy, TokenStorage, Ownable {
-    constructor(address _implementation, address _balances, address _allowances) 
+
+    string public name;                   
+    uint8  public decimals;                
+    string public symbol;
+
+    constructor(address _implementation, address _balances, address _allowances, string _name, uint8 _decimals, string _symbol) 
     UpgradeabilityProxy(_implementation) 
-    TokenStorage(_balances, _allowances) public {}
+    TokenStorage(_balances, _allowances) public {
+       name = _name;
+       decimals = _decimals;
+       symbol = _symbol;
+    }
 
     /**
     * @dev Upgrade the backing implementation of the proxy.
