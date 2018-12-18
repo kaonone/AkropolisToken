@@ -10,7 +10,6 @@ import './Ownable.sol';
 */
 
 contract Lockable is Ownable {
-
 	// Events
 	event Unlocked();
 	event Locked();
@@ -23,7 +22,7 @@ contract Lockable is Ownable {
 	* @dev Modifier that disables functions by default unless they are explicitly enabled
 	*/
 	modifier whenUnlocked() {
-		require(isMethodEnabled);
+		require(isMethodEnabled, "Contact is locked");
 		_;
 	}
 
