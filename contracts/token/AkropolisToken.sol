@@ -21,11 +21,11 @@ contract AkropolisToken is AkropolisBaseToken, Pausable, Lockable {
 
     /** Functions **/
 
-    function mint(address _to, uint256 _amount) public whenNotPaused {
+    function mint(address _to, uint256 _amount) public whenUnlocked  {
         super.mint(_to, _amount);
     }
 
-    function burn(uint256 _amount) public whenNotPaused {
+    function burn(uint256 _amount) public whenUnlocked  {
         super.burn(_amount);
     }
 
@@ -35,7 +35,7 @@ contract AkropolisToken is AkropolisBaseToken, Pausable, Lockable {
     * Upon construction, all calls to approve() will revert unless this contract owner explicitly unlocks approve()
     */
     function approve(address _spender, uint256 _value) 
-    public whenNotPaused whenUnlocked returns (bool) {
+    public whenNotPaused  returns (bool) {
         super.approve(_spender, _value);
     }
 
