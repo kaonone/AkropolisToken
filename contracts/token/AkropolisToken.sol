@@ -11,7 +11,7 @@ import "../helpers/Whitelist.sol";
 * @notice Adds pausability and disables approve() to defend against double-spend attacks in addition
 * to inherited AkropolisBaseToken behavior
 */
-contract AkropolisToken is AkropolisBaseToken, Pausable, Lockable {
+contract AkropolisToken is AkropolisBaseToken, Pausable, Lockable, Whitelist {
     using SafeMath for uint256;
 
     /** Events */
@@ -71,7 +71,7 @@ contract AkropolisToken is AkropolisBaseToken, Pausable, Lockable {
         return true;
     }
 
-    function transfer(address _to, uint256 _amount) public whenNotPaused returns (bool) {
+    function transfer(address _to, uint256 _amount) public whenNotPaused onlyWhitelist returns (bool) {
         super.transfer(_to, _amount);
     }
 
@@ -88,7 +88,7 @@ contract AkropolisToken is AkropolisBaseToken, Pausable, Lockable {
     * @return `true` if successful 
     */
     function transferFrom(address _from, address _to, uint256 _amount) 
-    public whenNotPaused returns (bool) {
+    public whenNotPaused onlyWhitelist returns (bool) {
         super.transferFrom(_from, _to, _amount);
     }
 
