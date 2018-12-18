@@ -17,9 +17,9 @@ contract TokenProxy is UpgradeabilityProxy, TokenStorage, Ownable {
     constructor(address _implementation, address _balances, address _allowances, string _name, uint8 _decimals, string _symbol) 
     UpgradeabilityProxy(_implementation) 
     TokenStorage(_balances, _allowances) public {
-       name = _name;
-       decimals = _decimals;
-       symbol = _symbol;
+        name = _name;
+        decimals = _decimals;
+        symbol = _symbol;
     }
 
     /**
