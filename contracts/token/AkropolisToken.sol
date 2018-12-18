@@ -1,8 +1,10 @@
 pragma solidity ^0.4.24;
 
-import './AkropolisBaseToken.sol';
+import "./AkropolisBaseToken.sol";
 import "../helpers/Lockable.sol";
 import "../helpers/Pausable.sol";
+import "../helpers/Whitelist.sol";
+
 
 /**
 * @title AkropolisToken
