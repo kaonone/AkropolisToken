@@ -9,58 +9,56 @@ import "./Ownable.sol";
  */
  
 contract Whitelist is Ownable {
-    event EnableWhitelist(address indexed to);
-    event DisableWhitelist(address indexed to);
-    event Enable();
-    event Disable();
+    event AddToWhitelist(address indexed to);
+    event RemoveFromWhitelist(address indexed to);
+    event EnableWhitelist();
+    event DisableWhitelist();
 
     mapping(address => bool) whitelist;
 
-    bool public enable = false;
+    bool public whitelisted = false;
 
     /**
     * @dev Modifier to make a function callable only when msg.sender is in whitelist.
     */
     modifier onlyWhitelist() {
-        if (enable == true) {
+        if (whitelisted == true) {
             require(whitelist[msg.sender] == true, "Address is not in whitelist");
         }
         _;
     }
 
-
    /**
     * @dev called by the owner to enable whitelist
     */
 
-    function enable() public onlyOwner {
-        enable = true;
-        emit Enable();
+    function enableWhitelist() public onlyOwner {
+        whitelisted = true;
+        emit EnableWhitelist();
     }
 
 
     /**
     * @dev called by the owner to disable whitelist
     */
-    function disable() public onlyOwner {
-        enable = false;
-        emit Disable();
+    function disableWhitelist() public onlyOwner {
+        whitelisted = false;
+        emit DisableWhitelist();
     }
 
     /**
     * @dev called by the owner to enable some address for whitelist
     */
-    function enableWhitelist(address _address) public onlyOwner  {
+    function addToWhitelist(address _address) public onlyOwner  {
         whitelist[_address] = true;
-        emit EnableWhitelist(_address);
+        emit AddToWhitelist(_address);
     }
 
     /**
     * @dev called by the owner to disable address for whitelist
     */
-    function disableWhitelist(address _address) public onlyOwner {
+    function removeFromWhitelist(address _address) public onlyOwner {
         whitelist[_address] = false;
-        emit DisableWhitelist(_address);
-
+        emit RemoveFromWhitelist(_address);
     }
 }
