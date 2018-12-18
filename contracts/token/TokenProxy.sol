@@ -10,9 +10,9 @@ import '../helpers/Ownable.sol';
 */
 contract TokenProxy is UpgradeabilityProxy, TokenStorage, Ownable {
 
-    string public name;                   
-    uint8  public decimals;                
-    string public symbol;
+    string public name;   //name of Token                
+    uint8  public decimals;        //decimals of Token        
+    string public symbol;   //Symbol of Token
 
     constructor(address _implementation, address _balances, address _allowances, string _name, uint8 _decimals, string _symbol) 
     UpgradeabilityProxy(_implementation) 
