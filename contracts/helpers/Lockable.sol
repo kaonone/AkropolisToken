@@ -10,20 +10,19 @@ import './Ownable.sol';
 */
 
 contract Lockable is Ownable {
-
 	// Events
 	event Unlocked();
 	event Locked();
 
 	// Fields
-	bool public isMethodEnabled = false;
+	bool public locked = false;
 
 	// Modifiers
 	/**
 	* @dev Modifier that disables functions by default unless they are explicitly enabled
 	*/
 	modifier whenUnlocked() {
-		require(isMethodEnabled);
+		require(locked, "Contact is locked");
 		_;
 	}
 
@@ -31,16 +30,16 @@ contract Lockable is Ownable {
 	/**
 	* @dev called by the owner to enable method
 	*/
-	function unlock() onlyOwner public {
-		isMethodEnabled = true;
+	function unlock() public onlyOwner  {
+		locked = true;
 		emit Unlocked();
 	}
 
 	/**
 	* @dev called by the owner to disable method, back to normal state
 	*/
-	function lock() onlyOwner public {
-		isMethodEnabled = false;
+	function lock() public  onlyOwner {
+		locked = false;
 		emit Locked();
 	}
 
