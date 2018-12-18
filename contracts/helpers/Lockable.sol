@@ -31,7 +31,7 @@ contract Lockable is Ownable {
 	/**
 	* @dev called by the owner to enable method
 	*/
-	function unlock() onlyOwner public {
+	function unlock() public onlyOwner  {
 		isMethodEnabled = true;
 		emit Unlocked();
 	}
@@ -39,7 +39,7 @@ contract Lockable is Ownable {
 	/**
 	* @dev called by the owner to disable method, back to normal state
 	*/
-	function lock() onlyOwner public {
+	function lock() public  onlyOwner {
 		isMethodEnabled = false;
 		emit Locked();
 	}
