@@ -18,25 +18,25 @@
   ],
   "bytecode": "0x608060405234801561001057600080fd5b5061013f806100206000396000f300608060405260043610610041576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806319ff1d2114610046575b600080fd5b34801561005257600080fd5b5061005b6100d6565b6040518080602001828103825283818151815260200191508051906020019080838360005b8381101561009b578082015181840152602081019050610080565b50505050905090810190601f1680156100c85780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b60606040805190810160405280600a81526020017f4b6f6e69636869776121000000000000000000000000000000000000000000008152509050905600a165627a7a723058203b7536a5a46b15780990bd823c1f14a97e6313db3ce2c14493d616f29efdb86e0029",
   "deployedBytecode": "0x608060405260043610610041576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806319ff1d2114610046575b600080fd5b34801561005257600080fd5b5061005b6100d6565b6040518080602001828103825283818151815260200191508051906020019080838360005b8381101561009b578082015181840152602081019050610080565b50505050905090810190601f1680156100c85780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b60606040805190810160405280600a81526020017f4b6f6e69636869776121000000000000000000000000000000000000000000008152509050905600a165627a7a723058203b7536a5a46b15780990bd823c1f14a97e6313db3ce2c14493d616f29efdb86e0029",
-  "sourceMap": "26:114:14:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;26:114:14;;;;;;;",
-  "deployedSourceMap": "26:114:14:-;;;;;;;;;;;;;;;;;;;;;;;;57:81;;8:9:-1;5:2;;;30:1;27;20:12;5:2;57:81:14;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;99:1;94:3;90:11;84:18;80:1;75:3;71:11;64:39;52:2;49:1;45:10;40:15;;8:100;;;12:14;57:81:14;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;94:6;112:19;;;;;;;;;;;;;;;;;;;;57:81;:::o",
+  "sourceMap": "26:114:15:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;26:114:15;;;;;;;",
+  "deployedSourceMap": "26:114:15:-;;;;;;;;;;;;;;;;;;;;;;;;57:81;;8:9:-1;5:2;;;30:1;27;20:12;5:2;57:81:15;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;99:1;94:3;90:11;84:18;80:1;75:3;71:11;64:39;52:2;49:1;45:10;40:15;;8:100;;;12:14;57:81:15;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;94:6;112:19;;;;;;;;;;;;;;;;;;;;57:81;:::o",
   "source": "pragma solidity ^0.4.24;\n\ncontract DummyContractV0 {\n    function hello() public pure returns(string) {\n        return \"Konichiwa!\";\n    }\n}\n\ncontract DummyContractV1 is DummyContractV0 {\n    function hello() public pure returns(string) {\n        return \"Hello!\";\n    }\n\n    function goodbye() public pure returns(string) {\n        return \"Adios\";\n    }\n}",
   "sourcePath": "/Users/alexandermazaletskiy/Documents/Akropolis/UpgradeableERC20/contracts/upgradeability/mocks/DummyContract.sol",
   "ast": {
     "absolutePath": "/Users/alexandermazaletskiy/Documents/Akropolis/UpgradeableERC20/contracts/upgradeability/mocks/DummyContract.sol",
     "exportedSymbols": {
       "DummyContractV0": [
-        1402
+        1481
       ],
       "DummyContractV1": [
-        1421
+        1500
       ]
     },
-    "id": 1422,
+    "id": 1501,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1393,
+        "id": 1472,
         "literals": [
           "solidity",
           "^",
@@ -44,7 +44,7 @@
           ".24"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:24:14"
+        "src": "0:24:15"
       },
       {
         "baseContracts": [],
@@ -52,31 +52,31 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 1402,
+        "id": 1481,
         "linearizedBaseContracts": [
-          1402
+          1481
         ],
         "name": "DummyContractV0",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 1400,
+              "id": 1479,
               "nodeType": "Block",
-              "src": "102:36:14",
+              "src": "102:36:15",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
                     "hexValue": "4b6f6e69636869776121",
-                    "id": 1398,
+                    "id": 1477,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": true,
                     "kind": "string",
                     "lValueRequested": false,
                     "nodeType": "Literal",
-                    "src": "119:12:14",
+                    "src": "119:12:15",
                     "subdenomination": null,
                     "typeDescriptions": {
                       "typeIdentifier": "t_stringliteral_b3e3db55f84e4eed805904788283bfaa042f7609c07652d180d0ab63674e1a80",
@@ -84,15 +84,15 @@
                     },
                     "value": "Konichiwa!"
                   },
-                  "functionReturnParameters": 1397,
-                  "id": 1399,
+                  "functionReturnParameters": 1476,
+                  "id": 1478,
                   "nodeType": "Return",
-                  "src": "112:19:14"
+                  "src": "112:19:15"
                 }
               ]
             },
             "documentation": null,
-            "id": 1401,
+            "id": 1480,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -100,23 +100,23 @@
             "name": "hello",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1394,
+              "id": 1473,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "71:2:14"
+              "src": "71:2:15"
             },
             "payable": false,
             "returnParameters": {
-              "id": 1397,
+              "id": 1476,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1396,
+                  "id": 1475,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1401,
-                  "src": "94:6:14",
+                  "scope": 1480,
+                  "src": "94:6:15",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -124,10 +124,10 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 1395,
+                    "id": 1474,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
-                    "src": "94:6:14",
+                    "src": "94:6:15",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage_ptr",
                       "typeString": "string"
@@ -137,17 +137,17 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "93:8:14"
+              "src": "93:8:15"
             },
-            "scope": 1402,
-            "src": "57:81:14",
+            "scope": 1481,
+            "src": "57:81:15",
             "stateMutability": "pure",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 1422,
-        "src": "26:114:14"
+        "scope": 1501,
+        "src": "26:114:15"
       },
       {
         "baseContracts": [
@@ -155,53 +155,53 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 1403,
+              "id": 1482,
               "name": "DummyContractV0",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 1402,
-              "src": "170:15:14",
+              "referencedDeclaration": 1481,
+              "src": "170:15:15",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_DummyContractV0_$1402",
+                "typeIdentifier": "t_contract$_DummyContractV0_$1481",
                 "typeString": "contract DummyContractV0"
               }
             },
-            "id": 1404,
+            "id": 1483,
             "nodeType": "InheritanceSpecifier",
-            "src": "170:15:14"
+            "src": "170:15:15"
           }
         ],
         "contractDependencies": [
-          1402
+          1481
         ],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 1421,
+        "id": 1500,
         "linearizedBaseContracts": [
-          1421,
-          1402
+          1500,
+          1481
         ],
         "name": "DummyContractV1",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 1411,
+              "id": 1490,
               "nodeType": "Block",
-              "src": "237:32:14",
+              "src": "237:32:15",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
                     "hexValue": "48656c6c6f21",
-                    "id": 1409,
+                    "id": 1488,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": true,
                     "kind": "string",
                     "lValueRequested": false,
                     "nodeType": "Literal",
-                    "src": "254:8:14",
+                    "src": "254:8:15",
                     "subdenomination": null,
                     "typeDescriptions": {
                       "typeIdentifier": "t_stringliteral_6cdba77591a790691c694fa0be937f835b8a589095e427022aa1035e579ee596",
@@ -209,15 +209,15 @@
                     },
                     "value": "Hello!"
                   },
-                  "functionReturnParameters": 1408,
-                  "id": 1410,
+                  "functionReturnParameters": 1487,
+                  "id": 1489,
                   "nodeType": "Return",
-                  "src": "247:15:14"
+                  "src": "247:15:15"
                 }
               ]
             },
             "documentation": null,
-            "id": 1412,
+            "id": 1491,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -225,23 +225,23 @@
             "name": "hello",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1405,
+              "id": 1484,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "206:2:14"
+              "src": "206:2:15"
             },
             "payable": false,
             "returnParameters": {
-              "id": 1408,
+              "id": 1487,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1407,
+                  "id": 1486,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1412,
-                  "src": "229:6:14",
+                  "scope": 1491,
+                  "src": "229:6:15",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -249,10 +249,10 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 1406,
+                    "id": 1485,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
-                    "src": "229:6:14",
+                    "src": "229:6:15",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage_ptr",
                       "typeString": "string"
@@ -262,32 +262,32 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "228:8:14"
+              "src": "228:8:15"
             },
-            "scope": 1421,
-            "src": "192:77:14",
+            "scope": 1500,
+            "src": "192:77:15",
             "stateMutability": "pure",
-            "superFunction": 1401,
+            "superFunction": 1480,
             "visibility": "public"
           },
           {
             "body": {
-              "id": 1419,
+              "id": 1498,
               "nodeType": "Block",
-              "src": "322:31:14",
+              "src": "322:31:15",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
                     "hexValue": "4164696f73",
-                    "id": 1417,
+                    "id": 1496,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": true,
                     "kind": "string",
                     "lValueRequested": false,
                     "nodeType": "Literal",
-                    "src": "339:7:14",
+                    "src": "339:7:15",
                     "subdenomination": null,
                     "typeDescriptions": {
                       "typeIdentifier": "t_stringliteral_f6b0ec4e4cb7dfa07aadda7cd2416c7d2f2ff50d8de2a83a44e89fcd74c6eee6",
@@ -295,15 +295,15 @@
                     },
                     "value": "Adios"
                   },
-                  "functionReturnParameters": 1416,
-                  "id": 1418,
+                  "functionReturnParameters": 1495,
+                  "id": 1497,
                   "nodeType": "Return",
-                  "src": "332:14:14"
+                  "src": "332:14:15"
                 }
               ]
             },
             "documentation": null,
-            "id": 1420,
+            "id": 1499,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -311,23 +311,23 @@
             "name": "goodbye",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1413,
+              "id": 1492,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "291:2:14"
+              "src": "291:2:15"
             },
             "payable": false,
             "returnParameters": {
-              "id": 1416,
+              "id": 1495,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1415,
+                  "id": 1494,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1420,
-                  "src": "314:6:14",
+                  "scope": 1499,
+                  "src": "314:6:15",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -335,10 +335,10 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 1414,
+                    "id": 1493,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
-                    "src": "314:6:14",
+                    "src": "314:6:15",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage_ptr",
                       "typeString": "string"
@@ -348,36 +348,36 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "313:8:14"
+              "src": "313:8:15"
             },
-            "scope": 1421,
-            "src": "275:78:14",
+            "scope": 1500,
+            "src": "275:78:15",
             "stateMutability": "pure",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 1422,
-        "src": "142:213:14"
+        "scope": 1501,
+        "src": "142:213:15"
       }
     ],
-    "src": "0:355:14"
+    "src": "0:355:15"
   },
   "legacyAST": {
     "absolutePath": "/Users/alexandermazaletskiy/Documents/Akropolis/UpgradeableERC20/contracts/upgradeability/mocks/DummyContract.sol",
     "exportedSymbols": {
       "DummyContractV0": [
-        1402
+        1481
       ],
       "DummyContractV1": [
-        1421
+        1500
       ]
     },
-    "id": 1422,
+    "id": 1501,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1393,
+        "id": 1472,
         "literals": [
           "solidity",
           "^",
@@ -385,7 +385,7 @@
           ".24"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:24:14"
+        "src": "0:24:15"
       },
       {
         "baseContracts": [],
@@ -393,31 +393,31 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 1402,
+        "id": 1481,
         "linearizedBaseContracts": [
-          1402
+          1481
         ],
         "name": "DummyContractV0",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 1400,
+              "id": 1479,
               "nodeType": "Block",
-              "src": "102:36:14",
+              "src": "102:36:15",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
                     "hexValue": "4b6f6e69636869776121",
-                    "id": 1398,
+                    "id": 1477,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": true,
                     "kind": "string",
                     "lValueRequested": false,
                     "nodeType": "Literal",
-                    "src": "119:12:14",
+                    "src": "119:12:15",
                     "subdenomination": null,
                     "typeDescriptions": {
                       "typeIdentifier": "t_stringliteral_b3e3db55f84e4eed805904788283bfaa042f7609c07652d180d0ab63674e1a80",
@@ -425,15 +425,15 @@
                     },
                     "value": "Konichiwa!"
                   },
-                  "functionReturnParameters": 1397,
-                  "id": 1399,
+                  "functionReturnParameters": 1476,
+                  "id": 1478,
                   "nodeType": "Return",
-                  "src": "112:19:14"
+                  "src": "112:19:15"
                 }
               ]
             },
             "documentation": null,
-            "id": 1401,
+            "id": 1480,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -441,23 +441,23 @@
             "name": "hello",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1394,
+              "id": 1473,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "71:2:14"
+              "src": "71:2:15"
             },
             "payable": false,
             "returnParameters": {
-              "id": 1397,
+              "id": 1476,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1396,
+                  "id": 1475,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1401,
-                  "src": "94:6:14",
+                  "scope": 1480,
+                  "src": "94:6:15",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -465,10 +465,10 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 1395,
+                    "id": 1474,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
-                    "src": "94:6:14",
+                    "src": "94:6:15",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage_ptr",
                       "typeString": "string"
@@ -478,17 +478,17 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "93:8:14"
+              "src": "93:8:15"
             },
-            "scope": 1402,
-            "src": "57:81:14",
+            "scope": 1481,
+            "src": "57:81:15",
             "stateMutability": "pure",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 1422,
-        "src": "26:114:14"
+        "scope": 1501,
+        "src": "26:114:15"
       },
       {
         "baseContracts": [
@@ -496,53 +496,53 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 1403,
+              "id": 1482,
               "name": "DummyContractV0",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 1402,
-              "src": "170:15:14",
+              "referencedDeclaration": 1481,
+              "src": "170:15:15",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_DummyContractV0_$1402",
+                "typeIdentifier": "t_contract$_DummyContractV0_$1481",
                 "typeString": "contract DummyContractV0"
               }
             },
-            "id": 1404,
+            "id": 1483,
             "nodeType": "InheritanceSpecifier",
-            "src": "170:15:14"
+            "src": "170:15:15"
           }
         ],
         "contractDependencies": [
-          1402
+          1481
         ],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 1421,
+        "id": 1500,
         "linearizedBaseContracts": [
-          1421,
-          1402
+          1500,
+          1481
         ],
         "name": "DummyContractV1",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 1411,
+              "id": 1490,
               "nodeType": "Block",
-              "src": "237:32:14",
+              "src": "237:32:15",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
                     "hexValue": "48656c6c6f21",
-                    "id": 1409,
+                    "id": 1488,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": true,
                     "kind": "string",
                     "lValueRequested": false,
                     "nodeType": "Literal",
-                    "src": "254:8:14",
+                    "src": "254:8:15",
                     "subdenomination": null,
                     "typeDescriptions": {
                       "typeIdentifier": "t_stringliteral_6cdba77591a790691c694fa0be937f835b8a589095e427022aa1035e579ee596",
@@ -550,15 +550,15 @@
                     },
                     "value": "Hello!"
                   },
-                  "functionReturnParameters": 1408,
-                  "id": 1410,
+                  "functionReturnParameters": 1487,
+                  "id": 1489,
                   "nodeType": "Return",
-                  "src": "247:15:14"
+                  "src": "247:15:15"
                 }
               ]
             },
             "documentation": null,
-            "id": 1412,
+            "id": 1491,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -566,23 +566,23 @@
             "name": "hello",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1405,
+              "id": 1484,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "206:2:14"
+              "src": "206:2:15"
             },
             "payable": false,
             "returnParameters": {
-              "id": 1408,
+              "id": 1487,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1407,
+                  "id": 1486,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1412,
-                  "src": "229:6:14",
+                  "scope": 1491,
+                  "src": "229:6:15",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -590,10 +590,10 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 1406,
+                    "id": 1485,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
-                    "src": "229:6:14",
+                    "src": "229:6:15",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage_ptr",
                       "typeString": "string"
@@ -603,32 +603,32 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "228:8:14"
+              "src": "228:8:15"
             },
-            "scope": 1421,
-            "src": "192:77:14",
+            "scope": 1500,
+            "src": "192:77:15",
             "stateMutability": "pure",
-            "superFunction": 1401,
+            "superFunction": 1480,
             "visibility": "public"
           },
           {
             "body": {
-              "id": 1419,
+              "id": 1498,
               "nodeType": "Block",
-              "src": "322:31:14",
+              "src": "322:31:15",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
                     "hexValue": "4164696f73",
-                    "id": 1417,
+                    "id": 1496,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": true,
                     "kind": "string",
                     "lValueRequested": false,
                     "nodeType": "Literal",
-                    "src": "339:7:14",
+                    "src": "339:7:15",
                     "subdenomination": null,
                     "typeDescriptions": {
                       "typeIdentifier": "t_stringliteral_f6b0ec4e4cb7dfa07aadda7cd2416c7d2f2ff50d8de2a83a44e89fcd74c6eee6",
@@ -636,15 +636,15 @@
                     },
                     "value": "Adios"
                   },
-                  "functionReturnParameters": 1416,
-                  "id": 1418,
+                  "functionReturnParameters": 1495,
+                  "id": 1497,
                   "nodeType": "Return",
-                  "src": "332:14:14"
+                  "src": "332:14:15"
                 }
               ]
             },
             "documentation": null,
-            "id": 1420,
+            "id": 1499,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -652,23 +652,23 @@
             "name": "goodbye",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1413,
+              "id": 1492,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "291:2:14"
+              "src": "291:2:15"
             },
             "payable": false,
             "returnParameters": {
-              "id": 1416,
+              "id": 1495,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1415,
+                  "id": 1494,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1420,
-                  "src": "314:6:14",
+                  "scope": 1499,
+                  "src": "314:6:15",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -676,10 +676,10 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 1414,
+                    "id": 1493,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
-                    "src": "314:6:14",
+                    "src": "314:6:15",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage_ptr",
                       "typeString": "string"
@@ -689,20 +689,20 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "313:8:14"
+              "src": "313:8:15"
             },
-            "scope": 1421,
-            "src": "275:78:14",
+            "scope": 1500,
+            "src": "275:78:15",
             "stateMutability": "pure",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 1422,
-        "src": "142:213:14"
+        "scope": 1501,
+        "src": "142:213:15"
       }
     ],
-    "src": "0:355:14"
+    "src": "0:355:15"
   },
   "compiler": {
     "name": "solc",
@@ -710,5 +710,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-  "updatedAt": "2018-12-17T15:46:30.489Z"
+  "updatedAt": "2018-12-18T12:12:48.751Z"
 }
