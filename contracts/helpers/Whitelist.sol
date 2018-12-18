@@ -15,16 +15,29 @@ contract Whitelist is Ownable {
 
     mapping(address => bool) whitelist;
 
+    /**
+    * @dev Modifier to make a function callable only when msg.sender is in whitelist.
+    */
     modifier onlyWhitelist() {
         require(whitelist[msg.sender] == true);
         _;
     }
+   
 
+    /**
+    * @dev alled by the owner to enable some address for whitelist
+    */
     function enableWhitelist(address _address) public onlyOwner  {
         whitelist[_address] = true;
+        emit EnableWhitelist(_address);
     }
 
+    /**
+    * @dev alled by the owner to disable address for whitelist
+    */
     function disableWhitelist(address _address) public onlyOwner {
         whitelist[_address] = false;
+        emit DisableWhitelist(_address);
+        
     }
 }
