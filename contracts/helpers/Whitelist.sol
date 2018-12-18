@@ -11,19 +11,44 @@ import "./Ownable.sol";
 contract Whitelist is Ownable {
     event EnableWhitelist(address indexed to);
     event DisableWhitelist(address indexed to);
+    event Enable();
+    event Disable();
 
     mapping(address => bool) whitelist;
+
+    bool public enable = false;
 
     /**
     * @dev Modifier to make a function callable only when msg.sender is in whitelist.
     */
     modifier onlyWhitelist() {
-        require(whitelist[msg.sender] == true, "Address is not in whitelist");
+        if (enable == true) {
+            require(whitelist[msg.sender] == true, "Address is not in whitelist");
+        }
         _;
     }
 
+
+   /**
+    * @dev called by the owner to enable whitelist
+    */
+
+    function enable() public onlyOwner {
+        enable = true;
+        emit Enable();
+    }
+
+
     /**
-    * @dev alled by the owner to enable some address for whitelist
+    * @dev called by the owner to disable whitelist
+    */
+    function disable() public onlyOwner {
+        enable = false;
+        emit Disable();
+    }
+
+    /**
+    * @dev called by the owner to enable some address for whitelist
     */
     function enableWhitelist(address _address) public onlyOwner  {
         whitelist[_address] = true;
@@ -31,7 +56,7 @@ contract Whitelist is Ownable {
     }
 
     /**
-    * @dev alled by the owner to disable address for whitelist
+    * @dev called by the owner to disable address for whitelist
     */
     function disableWhitelist(address _address) public onlyOwner {
         whitelist[_address] = false;
