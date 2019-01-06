@@ -38,7 +38,7 @@ contract AkropolisToken is AkropolisBaseToken, Pausable, Lockable, Whitelist {
     */
     function approve(address _spender, uint256 _value) 
     public whenNotPaused  returns (bool) {
-        super.approve(_spender, _value);
+        return super.approve(_spender, _value);
     }
 
     /**
@@ -72,7 +72,7 @@ contract AkropolisToken is AkropolisBaseToken, Pausable, Lockable, Whitelist {
     }
 
     function transfer(address _to, uint256 _amount) public whenNotPaused onlyWhitelist returns (bool) {
-        super.transfer(_to, _amount);
+        return super.transfer(_to, _amount);
     }
 
     /**
@@ -89,7 +89,7 @@ contract AkropolisToken is AkropolisBaseToken, Pausable, Lockable, Whitelist {
     */
     function transferFrom(address _from, address _to, uint256 _amount) 
     public whenNotPaused onlyWhitelist returns (bool) {
-        super.transferFrom(_from, _to, _amount);
+        return super.transferFrom(_from, _to, _amount);
     }
 
 
