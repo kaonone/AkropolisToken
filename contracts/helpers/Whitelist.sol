@@ -16,13 +16,11 @@ contract Whitelist is Ownable {
 
     mapping(address => bool) whitelist;
 
-    bool public whitelisted = false;
-
     /**
     * @dev Modifier to make a function callable only when msg.sender is in whitelist.
     */
     modifier onlyWhitelist() {
-        if (whitelisted == true) {
+        if (isWhitelisted() == true) {
             require(whitelist[msg.sender] == true, "Address is not in whitelist");
         }
         _;
@@ -33,7 +31,7 @@ contract Whitelist is Ownable {
     */
 
     function enableWhitelist() public onlyOwner {
-        whitelisted = true;
+        setWhitelisted(true);
         emit EnableWhitelist();
     }
 
@@ -42,7 +40,7 @@ contract Whitelist is Ownable {
     * @dev called by the owner to disable whitelist
     */
     function disableWhitelist() public onlyOwner {
-        whitelisted = false;
+        setWhitelisted(false);
         emit DisableWhitelist();
     }
 
@@ -60,5 +58,25 @@ contract Whitelist is Ownable {
     function removeFromWhitelist(address _address) public onlyOwner {
         whitelist[_address] = false;
         emit RemoveFromWhitelist(_address);
+    }
+
+
+    // bool public whitelisted = false;
+
+    function setWhitelisted(bool value) internal {
+        bytes32 slot = keccak256(abi.encode("Whitelist", "whitelisted"));
+        uint256 v = value ? 1 : 0;
+        assembly {
+            sstore(slot, v)
+        }
+    }
+
+    function isWhitelisted() public view returns (bool) {
+        bytes32 slot = keccak256(abi.encode("Whitelist", "whitelisted"));
+        uint256 v;
+        assembly {
+            v := sload(slot)
+        }
+        return v != 0;
     }
 }

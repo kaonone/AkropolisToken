@@ -2,24 +2,17 @@ pragma solidity ^0.4.24;
 
 import "./dataStorage/TokenStorage.sol";
 import "zos-lib/contracts/upgradeability/UpgradeabilityProxy.sol";
-import '../helpers/Ownable.sol';
+import "../helpers/Ownable.sol";
+import "./dataStorage/StorageState.sol";
 
 /**
 * @title TokenProxy
 * @notice A proxy contract that serves the latest implementation of TokenProxy.
 */
-contract TokenProxy is UpgradeabilityProxy, TokenStorage, Ownable {
-
-    string public name;   //name of Token                
-    uint8  public decimals;        //decimals of Token        
-    string public symbol;   //Symbol of Token
-
+contract TokenProxy is UpgradeabilityProxy, TokenStorage, Ownable, StorageState {
     constructor(address _implementation, address _balances, address _allowances, string _name, uint8 _decimals, string _symbol) 
     UpgradeabilityProxy(_implementation) 
-    TokenStorage(_balances, _allowances) public {
-        name = _name;
-        decimals = _decimals;
-        symbol = _symbol;
+    TokenStorage(_balances, _allowances, _name, _decimals, _symbol) public {
     }
 
     /**

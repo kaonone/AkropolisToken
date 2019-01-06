@@ -10,9 +10,9 @@ import '../helpers/Ownable.sol';
 * upgrades only after a set amount of time (denominated in blocks mined) 
 */
 contract TokenProxyDelayed is DelayedUpgradeabilityProxy, TokenStorage, Ownable {
-    constructor(address _implementation, address _balances, address _allowances) 
+    constructor(address _implementation, address _balances, address _allowances, string _name, uint8 _decimals, string _symbol) 
     DelayedUpgradeabilityProxy(_implementation) 
-    TokenStorage(_balances, _allowances) public {}
+    TokenStorage(_balances, _allowances, _name, _decimals, _symbol) public {}
 
     /**
     * @dev Upgrade the backing implementation of the proxy.
