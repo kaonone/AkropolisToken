@@ -4,16 +4,13 @@ import './AkropolisBaseToken.sol';
 import "../helpers/Lockable.sol";
 import "../helpers/Pausable.sol";
 
-
 /**
 * @title AkropolisToken
 * @notice Adds pausability and disables approve() to defend against double-spend attacks in addition
 * to inherited AkropolisBaseToken behavior
 */
-
 contract AkropolisToken is AkropolisBaseToken, Pausable, Lockable {
     using SafeMath for uint256;
-
 
     /** Events */
 
@@ -39,7 +36,7 @@ contract AkropolisToken is AkropolisBaseToken, Pausable, Lockable {
     */
     function approve(address _spender, uint256 _value) 
     public whenNotPaused whenUnlocked returns (bool) {
-        super.approve(_spender, _value);
+        return super.approve(_spender, _value);
     }
 
     /**
@@ -73,7 +70,7 @@ contract AkropolisToken is AkropolisBaseToken, Pausable, Lockable {
     }
 
     function transfer(address _to, uint256 _amount) public whenNotPaused returns (bool) {
-        super.transfer(_to, _amount);
+        return super.transfer(_to, _amount);
     }
 
     /**
@@ -90,7 +87,7 @@ contract AkropolisToken is AkropolisBaseToken, Pausable, Lockable {
     */
     function transferFrom(address _from, address _to, uint256 _amount) 
     public whenNotPaused returns (bool) {
-        super.transferFrom(_from, _to, _amount);
+        return super.transferFrom(_from, _to, _amount);
     }
 
 
