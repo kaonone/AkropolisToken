@@ -29,16 +29,26 @@ contract Whitelist is Ownable {
         _;
     }
 
+    /**
+    * @dev Modifier to make a function callable only when msg.sender is in permitted balance
+    */
     modifier checkPermBalanceForWhitelist(uint256 value) {
-        require(permBalancesForWhitelist[msg.sender]==0 || permBalancesForWhitelist[msg.sender]<=value, "Not permitted balance for transfer");
+        require(permBalancesForWhitelist[msg.sender]==0 || permBalancesForWhitelist[msg.sender]>=value, "Not permitted balance for transfer");
         _;
     }
+
+    /**
+    * @dev called by the owner to set permitted balance for transfer
+    */
 
     function addPermBalanceToWhitelist(address _owner, uint256 _balance) public onlyOwner {
         permBalancesForWhitelist[_owner] = _balance;
         emit AddPermBalanceToWhitelist(_owner, _balance);
     }
 
+    /**
+    * @dev called by the owner to remove permitted balance for transfer
+    */
     function removePermBalanceToWhitelist(address _owner) public onlyOwner {
         permBalancesForWhitelist[_owner] = 0;
         emit RemovePermBalanceToWhitelist(_owner);
