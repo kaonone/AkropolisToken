@@ -71,7 +71,7 @@ contract AkropolisToken is AkropolisBaseToken, Pausable, Lockable, Whitelist {
         return true;
     }
 
-    function transfer(address _to, uint256 _amount) public whenNotPaused onlyWhitelist returns (bool) {
+    function transfer(address _to, uint256 _amount) public whenNotPaused onlyWhitelist checkPermBalanceForWhitelist(_amount) returns (bool) {
         return super.transfer(_to, _amount);
     }
 
@@ -88,7 +88,7 @@ contract AkropolisToken is AkropolisBaseToken, Pausable, Lockable, Whitelist {
     * @return `true` if successful 
     */
     function transferFrom(address _from, address _to, uint256 _amount) 
-    public whenNotPaused onlyWhitelist returns (bool) {
+    public whenNotPaused onlyWhitelist checkPermBalanceForWhitelist(_amount) returns (bool) {
         return super.transferFrom(_from, _to, _amount);
     }
 

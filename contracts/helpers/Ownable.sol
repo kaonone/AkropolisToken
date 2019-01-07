@@ -15,7 +15,7 @@ contract Ownable {
 
 
     event OwnershipTransferred(
-     address indexed previousOwner,
+      address indexed previousOwner,
       address indexed newOwner
     );
 
