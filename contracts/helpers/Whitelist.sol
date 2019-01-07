@@ -33,7 +33,10 @@ contract Whitelist is Ownable {
     * @dev Modifier to make a function callable only when msg.sender is in permitted balance
     */
     modifier checkPermBalanceForWhitelist(uint256 value) {
-        require(permBalancesForWhitelist[msg.sender]==0 || permBalancesForWhitelist[msg.sender]>=value, "Not permitted balance for transfer");
+        if (isWhitelisted() == true) {
+            require(permBalancesForWhitelist[msg.sender]==0 || permBalancesForWhitelist[msg.sender]>=value, "Not permitted balance for transfer");
+        }
+        
         _;
     }
 
