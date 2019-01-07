@@ -13,8 +13,11 @@ contract Whitelist is Ownable {
     event RemoveFromWhitelist(address indexed to);
     event EnableWhitelist();
     event DisableWhitelist();
+    event AddPermBalanceToWhitelist(address indexed to, uint256 balance);
+    event RemovePermBalanceToWhitelist(address indexed to);
 
-    mapping(address => bool) whitelist;
+    mapping(address => bool) internal whitelist;
+    mapping (address => uint256) internal permBalancesForWhitelist;
 
     /**
     * @dev Modifier to make a function callable only when msg.sender is in whitelist.
@@ -26,7 +29,22 @@ contract Whitelist is Ownable {
         _;
     }
 
-   /**
+    modifier checkPermBalanceForWhitelist(uint256 value) {
+        require(permBalancesForWhitelist[msg.sender]==0 || permBalancesForWhitelist[msg.sender]<=value, "Not permitted balance for transfer");
+        _;
+    }
+
+    function addPermBalanceToWhitelist(address _owner, uint256 _balance) public onlyOwner {
+        permBalancesForWhitelist[_owner] = _balance;
+        emit AddPermBalanceToWhitelist(_owner, _balance);
+    }
+
+    function removePermBalanceToWhitelist(address _owner) public onlyOwner {
+        permBalancesForWhitelist[_owner] = 0;
+        emit RemovePermBalanceToWhitelist(_owner);
+    }
+   
+    /**
     * @dev called by the owner to enable whitelist
     */
 

@@ -1,0 +1,714 @@
+{
+  "contractName": "DummyContractV0",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "hello",
+      "outputs": [
+        {
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "pure",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x608060405234801561001057600080fd5b5061013f806100206000396000f300608060405260043610610041576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806319ff1d2114610046575b600080fd5b34801561005257600080fd5b5061005b6100d6565b6040518080602001828103825283818151815260200191508051906020019080838360005b8381101561009b578082015181840152602081019050610080565b50505050905090810190601f1680156100c85780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b60606040805190810160405280600a81526020017f4b6f6e69636869776121000000000000000000000000000000000000000000008152509050905600a165627a7a723058203b7536a5a46b15780990bd823c1f14a97e6313db3ce2c14493d616f29efdb86e0029",
+  "deployedBytecode": "0x608060405260043610610041576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806319ff1d2114610046575b600080fd5b34801561005257600080fd5b5061005b6100d6565b6040518080602001828103825283818151815260200191508051906020019080838360005b8381101561009b578082015181840152602081019050610080565b50505050905090810190601f1680156100c85780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b60606040805190810160405280600a81526020017f4b6f6e69636869776121000000000000000000000000000000000000000000008152509050905600a165627a7a723058203b7536a5a46b15780990bd823c1f14a97e6313db3ce2c14493d616f29efdb86e0029",
+  "sourceMap": "26:114:15:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;26:114:15;;;;;;;",
+  "deployedSourceMap": "26:114:15:-;;;;;;;;;;;;;;;;;;;;;;;;57:81;;8:9:-1;5:2;;;30:1;27;20:12;5:2;57:81:15;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;99:1;94:3;90:11;84:18;80:1;75:3;71:11;64:39;52:2;49:1;45:10;40:15;;8:100;;;12:14;57:81:15;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;94:6;112:19;;;;;;;;;;;;;;;;;;;;57:81;:::o",
+  "source": "pragma solidity ^0.4.24;\n\ncontract DummyContractV0 {\n    function hello() public pure returns(string) {\n        return \"Konichiwa!\";\n    }\n}\n\ncontract DummyContractV1 is DummyContractV0 {\n    function hello() public pure returns(string) {\n        return \"Hello!\";\n    }\n\n    function goodbye() public pure returns(string) {\n        return \"Adios\";\n    }\n}",
+  "sourcePath": "/Users/alexandermazaletskiy/Documents/Akropolis/UpgradeableERC20/contracts/upgradeability/mocks/DummyContract.sol",
+  "ast": {
+    "absolutePath": "/Users/alexandermazaletskiy/Documents/Akropolis/UpgradeableERC20/contracts/upgradeability/mocks/DummyContract.sol",
+    "exportedSymbols": {
+      "DummyContractV0": [
+        1680
+      ],
+      "DummyContractV1": [
+        1699
+      ]
+    },
+    "id": 1700,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1671,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:15"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 1680,
+        "linearizedBaseContracts": [
+          1680
+        ],
+        "name": "DummyContractV0",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 1678,
+              "nodeType": "Block",
+              "src": "102:36:15",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "hexValue": "4b6f6e69636869776121",
+                    "id": 1676,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "string",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "119:12:15",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_stringliteral_b3e3db55f84e4eed805904788283bfaa042f7609c07652d180d0ab63674e1a80",
+                      "typeString": "literal_string \"Konichiwa!\""
+                    },
+                    "value": "Konichiwa!"
+                  },
+                  "functionReturnParameters": 1675,
+                  "id": 1677,
+                  "nodeType": "Return",
+                  "src": "112:19:15"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 1679,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "hello",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1672,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "71:2:15"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 1675,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1674,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1679,
+                  "src": "94:6:15",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1673,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "94:6:15",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "93:8:15"
+            },
+            "scope": 1680,
+            "src": "57:81:15",
+            "stateMutability": "pure",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 1700,
+        "src": "26:114:15"
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 1681,
+              "name": "DummyContractV0",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1680,
+              "src": "170:15:15",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_DummyContractV0_$1680",
+                "typeString": "contract DummyContractV0"
+              }
+            },
+            "id": 1682,
+            "nodeType": "InheritanceSpecifier",
+            "src": "170:15:15"
+          }
+        ],
+        "contractDependencies": [
+          1680
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 1699,
+        "linearizedBaseContracts": [
+          1699,
+          1680
+        ],
+        "name": "DummyContractV1",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 1689,
+              "nodeType": "Block",
+              "src": "237:32:15",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "hexValue": "48656c6c6f21",
+                    "id": 1687,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "string",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "254:8:15",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_stringliteral_6cdba77591a790691c694fa0be937f835b8a589095e427022aa1035e579ee596",
+                      "typeString": "literal_string \"Hello!\""
+                    },
+                    "value": "Hello!"
+                  },
+                  "functionReturnParameters": 1686,
+                  "id": 1688,
+                  "nodeType": "Return",
+                  "src": "247:15:15"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 1690,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "hello",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1683,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "206:2:15"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 1686,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1685,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1690,
+                  "src": "229:6:15",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1684,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "229:6:15",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "228:8:15"
+            },
+            "scope": 1699,
+            "src": "192:77:15",
+            "stateMutability": "pure",
+            "superFunction": 1679,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1697,
+              "nodeType": "Block",
+              "src": "322:31:15",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "hexValue": "4164696f73",
+                    "id": 1695,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "string",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "339:7:15",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_stringliteral_f6b0ec4e4cb7dfa07aadda7cd2416c7d2f2ff50d8de2a83a44e89fcd74c6eee6",
+                      "typeString": "literal_string \"Adios\""
+                    },
+                    "value": "Adios"
+                  },
+                  "functionReturnParameters": 1694,
+                  "id": 1696,
+                  "nodeType": "Return",
+                  "src": "332:14:15"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 1698,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "goodbye",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1691,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "291:2:15"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 1694,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1693,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1698,
+                  "src": "314:6:15",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1692,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "314:6:15",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "313:8:15"
+            },
+            "scope": 1699,
+            "src": "275:78:15",
+            "stateMutability": "pure",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 1700,
+        "src": "142:213:15"
+      }
+    ],
+    "src": "0:355:15"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/alexandermazaletskiy/Documents/Akropolis/UpgradeableERC20/contracts/upgradeability/mocks/DummyContract.sol",
+    "exportedSymbols": {
+      "DummyContractV0": [
+        1680
+      ],
+      "DummyContractV1": [
+        1699
+      ]
+    },
+    "id": 1700,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1671,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:15"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 1680,
+        "linearizedBaseContracts": [
+          1680
+        ],
+        "name": "DummyContractV0",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 1678,
+              "nodeType": "Block",
+              "src": "102:36:15",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "hexValue": "4b6f6e69636869776121",
+                    "id": 1676,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "string",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "119:12:15",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_stringliteral_b3e3db55f84e4eed805904788283bfaa042f7609c07652d180d0ab63674e1a80",
+                      "typeString": "literal_string \"Konichiwa!\""
+                    },
+                    "value": "Konichiwa!"
+                  },
+                  "functionReturnParameters": 1675,
+                  "id": 1677,
+                  "nodeType": "Return",
+                  "src": "112:19:15"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 1679,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "hello",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1672,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "71:2:15"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 1675,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1674,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1679,
+                  "src": "94:6:15",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1673,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "94:6:15",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "93:8:15"
+            },
+            "scope": 1680,
+            "src": "57:81:15",
+            "stateMutability": "pure",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 1700,
+        "src": "26:114:15"
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 1681,
+              "name": "DummyContractV0",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1680,
+              "src": "170:15:15",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_DummyContractV0_$1680",
+                "typeString": "contract DummyContractV0"
+              }
+            },
+            "id": 1682,
+            "nodeType": "InheritanceSpecifier",
+            "src": "170:15:15"
+          }
+        ],
+        "contractDependencies": [
+          1680
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 1699,
+        "linearizedBaseContracts": [
+          1699,
+          1680
+        ],
+        "name": "DummyContractV1",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 1689,
+              "nodeType": "Block",
+              "src": "237:32:15",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "hexValue": "48656c6c6f21",
+                    "id": 1687,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "string",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "254:8:15",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_stringliteral_6cdba77591a790691c694fa0be937f835b8a589095e427022aa1035e579ee596",
+                      "typeString": "literal_string \"Hello!\""
+                    },
+                    "value": "Hello!"
+                  },
+                  "functionReturnParameters": 1686,
+                  "id": 1688,
+                  "nodeType": "Return",
+                  "src": "247:15:15"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 1690,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "hello",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1683,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "206:2:15"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 1686,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1685,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1690,
+                  "src": "229:6:15",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1684,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "229:6:15",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "228:8:15"
+            },
+            "scope": 1699,
+            "src": "192:77:15",
+            "stateMutability": "pure",
+            "superFunction": 1679,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1697,
+              "nodeType": "Block",
+              "src": "322:31:15",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "hexValue": "4164696f73",
+                    "id": 1695,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "string",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "339:7:15",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_stringliteral_f6b0ec4e4cb7dfa07aadda7cd2416c7d2f2ff50d8de2a83a44e89fcd74c6eee6",
+                      "typeString": "literal_string \"Adios\""
+                    },
+                    "value": "Adios"
+                  },
+                  "functionReturnParameters": 1694,
+                  "id": 1696,
+                  "nodeType": "Return",
+                  "src": "332:14:15"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 1698,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "goodbye",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1691,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "291:2:15"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 1694,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1693,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1698,
+                  "src": "314:6:15",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1692,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "314:6:15",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "313:8:15"
+            },
+            "scope": 1699,
+            "src": "275:78:15",
+            "stateMutability": "pure",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 1700,
+        "src": "142:213:15"
+      }
+    ],
+    "src": "0:355:15"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.1",
+  "updatedAt": "2019-01-07T11:19:30.469Z"
+}
