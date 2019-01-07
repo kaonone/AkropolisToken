@@ -14,15 +14,12 @@ contract Lockable is Ownable {
 	event Unlocked();
 	event Locked();
 
-	// Fields
-	bool public locked = false;
-
 	// Modifiers
 	/**
 	* @dev Modifier that disables functions by default unless they are explicitly enabled
 	*/
 	modifier whenUnlocked() {
-		require(locked, "Contact is locked");
+		require(isLocked(), "Contact is locked");
 		_;
 	}
 
@@ -31,7 +28,7 @@ contract Lockable is Ownable {
 	* @dev called by the owner to enable method
 	*/
 	function unlock() public onlyOwner  {
-		locked = true;
+		setLock(true);
 		emit Unlocked();
 	}
 
@@ -39,8 +36,25 @@ contract Lockable is Ownable {
 	* @dev called by the owner to disable method, back to normal state
 	*/
 	function lock() public  onlyOwner {
-		locked = false;
+		setLock(false);
 		emit Locked();
 	}
+
+	function setLock(bool value) internal {
+        bytes32 slot = keccak256(abi.encode("Lockable", "lock"));
+        uint256 v = value ? 1 : 0;
+        assembly {
+            sstore(slot, v)
+        }
+    }
+
+    function isLocked() public view returns (bool) {
+        bytes32 slot = keccak256(abi.encode("Lockable", "lock"));
+        uint256 v;
+        assembly {
+            v := sload(slot)
+        }
+        return v != 0;
+    }
 
 }

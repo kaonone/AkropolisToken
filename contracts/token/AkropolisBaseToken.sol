@@ -4,7 +4,7 @@ import "./dataStorage/TokenStorage.sol";
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 import "openzeppelin-solidity/contracts/AddressUtils.sol";
 import "openzeppelin-solidity/contracts/token/ERC20/ERC20.sol";
-import '../helpers/Ownable.sol';
+import "../helpers/Ownable.sol";
 
 /**
 * @title AkropolisBaseToken
@@ -20,8 +20,8 @@ contract AkropolisBaseToken is ERC20, TokenStorage, Ownable {
     event Approval(address indexed owner, address indexed spender, uint256 value);
 
 
-    constructor (address _balances, address _allowances) public 
-    TokenStorage(_balances, _allowances) {}
+    constructor (address _balances, address _allowances, string _name, uint8 _decimals, string _symbol) public 
+    TokenStorage(_balances, _allowances, _name, _decimals, _symbol) {}
 
     /** Modifiers **/
 

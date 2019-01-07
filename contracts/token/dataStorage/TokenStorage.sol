@@ -13,13 +13,22 @@ contract TokenStorage {
     BalanceSheet public balances;
     AllowanceSheet public allowances;
 
+
+    string public name;   //name of Token                
+    uint8  public decimals;        //decimals of Token        
+    string public symbol;   //Symbol of Token
+
     /**
     * @dev a TokenStorage consumer can set its storages only once, on construction
     *
     **/
-    constructor (address _balances, address _allowances) public {
+    constructor (address _balances, address _allowances, string _name, uint8 _decimals, string _symbol) public {
         balances = BalanceSheet(_balances);
         allowances = AllowanceSheet(_allowances);
+
+        name = _name;
+        decimals = _decimals;
+        symbol = _symbol;
     }
 
     /**
