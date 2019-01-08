@@ -32,7 +32,7 @@ contract AkropolisToken is AkropolisBaseToken, Pausable, Lockable, Whitelist {
     }
 
     /**
-    * @notice Implements ERC-20 standard approve function. Locked or disabled by default to protect against
+    * @notice Implements ERC-20 standard approve function.
     * double spend attacks. To modify allowances, clients should call safer increase/decreaseApproval methods.
     * Upon construction, all calls to approve() will revert unless this contract owner explicitly unlocks approve()
     */
