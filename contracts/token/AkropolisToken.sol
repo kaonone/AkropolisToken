@@ -1,4 +1,4 @@
-pragma solidity ^0.4.24;
+pragma solidity >=0.4.24;
 
 import "./AkropolisBaseToken.sol";
 import "../helpers/Lockable.sol";
@@ -37,7 +37,7 @@ contract AkropolisToken is AkropolisBaseToken, Pausable, Lockable, Whitelist {
     * Upon construction, all calls to approve() will revert unless this contract owner explicitly unlocks approve()
     */
     function approve(address _spender, uint256 _value) 
-    public whenNotPaused  returns (bool) {
+    public whenNotPaused  whenUnlocked returns (bool) {
         return super.approve(_spender, _value);
     }
 

@@ -1,4 +1,4 @@
-pragma solidity ^0.4.24;
+pragma solidity >=0.4.24;
 
 import './Ownable.sol';
 
@@ -19,7 +19,7 @@ contract Lockable is Ownable {
 	* @dev Modifier that disables functions by default unless they are explicitly enabled
 	*/
 	modifier whenUnlocked() {
-		require(isLocked(), "Contact is locked");
+		require(!isLocked(), "Contact is locked");
 		_;
 	}
 
@@ -28,7 +28,7 @@ contract Lockable is Ownable {
 	* @dev called by the owner to enable method
 	*/
 	function unlock() public onlyOwner  {
-		setLock(true);
+		setLock(false);
 		emit Unlocked();
 	}
 
@@ -36,7 +36,7 @@ contract Lockable is Ownable {
 	* @dev called by the owner to disable method, back to normal state
 	*/
 	function lock() public  onlyOwner {
-		setLock(false);
+		setLock(true);
 		emit Locked();
 	}
 
