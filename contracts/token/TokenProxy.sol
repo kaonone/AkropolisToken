@@ -1,4 +1,4 @@
-pragma solidity ^0.4.24;
+pragma solidity >=0.4.24;
 
 import "./dataStorage/TokenStorage.sol";
 import "zos-lib/contracts/upgradeability/UpgradeabilityProxy.sol";

@@ -1,4 +1,4 @@
-pragma solidity ^0.4.24;
+pragma solidity >=0.4.24;
 
 import "zos-lib/contracts/upgradeability/UpgradeabilityProxy.sol";
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
