@@ -1,4 +1,4 @@
-pragma solidity ^0.4.24;
+pragma solidity >=0.4.24;
 
 contract DummyContractV0 {
     function hello() public pure returns(string) {
