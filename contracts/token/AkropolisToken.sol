@@ -1,4 +1,4 @@
-pragma solidity >=0.4.24;
+pragma solidity ^0.4.24;
 
 import "./AkropolisBaseToken.sol";
 import "../helpers/Lockable.sol";
@@ -11,7 +11,7 @@ import "../helpers/Whitelist.sol";
 * @notice Adds pausability and disables approve() to defend against double-spend attacks in addition
 * to inherited AkropolisBaseToken behavior
 */
-contract AkropolisToken is AkropolisBaseToken, Pausable, Lockable, Whitelist {
+contract AkropolisToken is AkropolisBaseToken, Pausable, Lockable {
     using SafeMath for uint256;
 
     /** Events */
@@ -71,30 +71,7 @@ contract AkropolisToken is AkropolisBaseToken, Pausable, Lockable, Whitelist {
         return true;
     }
 
-    function transfer(address _to, uint256 _amount) public whenNotPaused onlyWhitelist checkPermBalanceForWhitelist(_amount) returns (bool) {
-        return super.transfer(_to, _amount);
-    }
-
-    /**
-    * @notice Initiates a transfer operation between address `_from` and `_to`. Requires that the
-    * message sender is an approved spender on the _from account.
-    * @dev When implemented, it should use the transferFromConditionsRequired() modifier.
-    * @param _to The address of the recipient. This address must not be blacklisted.
-    * @param _from The address of the origin of funds. This address _could_ be blacklisted, because
-    * a regulator may want to transfer tokens out of a blacklisted account, for example.
-    * In order to do so, the regulator would have to add themselves as an approved spender
-    * on the account via `addBlacklistAddressSpender()`, and would then be able to transfer tokens out of it.
-    * @param _amount The number of tokens to transfer
-    * @return `true` if successful 
-    */
-    function transferFrom(address _from, address _to, uint256 _amount) 
-    public whenNotPaused onlyWhitelist checkPermBalanceForWhitelist(_amount) returns (bool) {
-        return super.transferFrom(_from, _to, _amount);
-    }
-
-
-    /** Internal functions **/
-    
+    /** Internal functions **/    
     function decreaseApprovalAllArgs(address _spender, uint256 _subtractedValue, address _tokenHolder) internal {
         uint256 oldValue = allowances.allowanceOf(_tokenHolder, _spender);
         if (_subtractedValue > oldValue) {
