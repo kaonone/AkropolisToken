@@ -44,6 +44,14 @@ module.exports = {
 	      network_id: 42,
 	      gas: 7000000
 	    },
+	    mainnet: {
+	      provider: function () {
+	          return new HDWalletProvider(process.env.METAMASK_MNEMONIC, "https://mainnet.infura.io/v3/" + process.env.INFURA_API_KEY)
+	      },
+	      network_id: 1,
+	      gas: 6000000,
+	      gasPrice: 30000000000
+	    }
 	},
 	mocha: {
 	   reporter: 'eth-gas-reporter',
