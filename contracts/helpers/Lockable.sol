@@ -23,15 +23,6 @@ contract Lockable is Ownable {
 		_;
 	}
 
-	// Methods
-	/**
-	* @dev called by the owner to enable method
-	*/
-	function unlock() public onlyOwner  {
-		setLock(false);
-		emit Unlocked();
-	}
-
 	/**
 	* @dev called by the owner to disable method, back to normal state
 	*/
