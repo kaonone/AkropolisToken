@@ -23,7 +23,7 @@ contract AkropolisToken is AkropolisBaseToken, Pausable, Lockable, Whitelist {
 
     /** Functions **/
 
-    function mint(address _to, uint256 _amount) public whenUnlocked  {
+    function mint(address _to, uint256 _amount) public {
         super.mint(_to, _amount);
     }
 

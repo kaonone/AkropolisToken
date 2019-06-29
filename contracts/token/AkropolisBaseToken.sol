@@ -15,6 +15,7 @@ contract AkropolisBaseToken is ERC20, TokenStorage, Ownable {
 
     /** Events */
     event Mint(address indexed to, uint256 value);
+    event MintFinished();
     event Burn(address indexed burner, uint256 value);
     event Transfer(address indexed from, address indexed to, uint256 value);
     event Approval(address indexed owner, address indexed spender, uint256 value);
@@ -25,15 +26,45 @@ contract AkropolisBaseToken is ERC20, TokenStorage, Ownable {
 
     /** Modifiers **/
 
+    modifier canMint() {
+        require(!isMintingFinished());
+        _;
+    }
+
     /** Functions **/
 
-    function mint(address _to, uint256 _amount) public onlyOwner {
-        return _mint(_to, _amount);
+    function mint(address _to, uint256 _amount) public onlyOwner canMint {
+        _mint(_to, _amount);
     }
 
-    function burn(uint256 _amount) public {
+    function burn(uint256 _amount) public onlyOwner {
         _burn(msg.sender, _amount);
     }
+
+
+    function isMintingFinished() public view returns (bool) {
+        bytes32 slot = keccak256(abi.encode("Minting", "mint"));
+        uint256 v;
+        assembly {
+            v := sload(slot)
+        }
+        return v != 0;
+    }
+
+
+    function setMintingFinished(bool value) internal {
+        bytes32 slot = keccak256(abi.encode("Minting", "mint"));
+        uint256 v = value ? 1 : 0;
+        assembly {
+            sstore(slot, v)
+        }
+    }
+
+    function mintFinished() public onlyOwner {
+        setMintingFinished(true);
+        emit MintFinished();
+    }
+
 
     function approve(address _spender, uint256 _value) 
     public returns (bool) {

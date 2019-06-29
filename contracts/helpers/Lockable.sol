@@ -31,6 +31,15 @@ contract Lockable is Ownable {
 		emit Locked();
 	}
 
+	// Methods
+	/**
+	* @dev called by the owner to enable method
+	*/
+	function unlock() public onlyOwner  {
+		setLock(false);
+		emit Unlocked();
+	}
+
 	function setLock(bool value) internal {
         bytes32 slot = keccak256(abi.encode("Lockable", "lock"));
         uint256 v = value ? 1 : 0;
