@@ -1,12 +1,12 @@
 ![](MixBytes.png)
 
-# Audit of Acropolis Token Sale Contracts
+# Audit of Akropolis Token Sale Contracts
 
 ## Introduction
 
 ### General Provisions
 
-The Acropolis team asked [MixBytes](https://mixbytes.io) to audit their token sale contracts. The code was located in the hidden github repository. 
+The Akropolis team asked [MixBytes](https://mixbytes.io) to audit their token sale contracts. The code was located in the hidden github repository. 
 
 ### Scope of the Audit
 
