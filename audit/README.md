@@ -110,5 +110,6 @@ We recommend updating the compiler to version 0.5 or newer, as it includes error
 ## CONCLUSION
 
 The use of proxy-contracts mechanism in Solidity and EVM has its risks. We detected and suggested a fix to a problem that arose in connection with it. A number of minor issues were also addressed. The rest of the code is well-structured and written perfectly.
-The version https://github.com/akropolisio/AkropolisToken/tree/c52f938296e37716432265655528175b748df174 (development branch) doesn’t have any vulnerabilities or weak spots according to our analysis.
+
+The version [2e353cf](https://github.com/akropolisio/AkropolisToken/tree/2e353cfbb749af334fccaf395fd4c3d9f31a80b0) doesn’t have any vulnerabilities or weak spots according to our analysis.
 
