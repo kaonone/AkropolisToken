@@ -113,3 +113,5 @@ The use of proxy-contracts mechanism in Solidity and EVM has its risks. We detec
 
 The version [2e353cf](https://github.com/akropolisio/AkropolisToken/tree/2e353cfbb749af334fccaf395fd4c3d9f31a80b0) doesn’t have any vulnerabilities or weak spots according to our analysis.
 
+The token proxy was deployed at address 0x8ab7404063ec4dbcfd4598215992dc3f8ec853d7. The implementation  was deployed at address 0xb2734a4cec32c81fde26b0024ad3ceb8c9b34037.
+
