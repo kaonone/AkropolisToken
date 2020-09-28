@@ -4,14 +4,14 @@ import "./AkropolisBaseToken.sol";
 import "../helpers/Lockable.sol";
 import "../helpers/Pausable.sol";
 import "../helpers/Whitelist.sol";
-
+import "../helpers/Blacklist.sol";
 
 /**
 * @title AkropolisToken
 * @notice Adds pausability and disables approve() to defend against double-spend attacks in addition
 * to inherited AkropolisBaseToken behavior
 */
-contract AkropolisToken is AkropolisBaseToken, Pausable, Lockable, Whitelist {
+contract AkropolisToken is AkropolisBaseToken, Pausable, Lockable, Whitelist, Blacklist {
     using SafeMath for uint256;
 
     /** Events */
@@ -71,7 +71,7 @@ contract AkropolisToken is AkropolisBaseToken, Pausable, Lockable, Whitelist {
         return true;
     }
 
-    function transfer(address _to, uint256 _amount) public whenNotPaused onlyWhitelist checkPermBalanceForWhitelist(_amount) returns (bool) {
+    function transfer(address _to, uint256 _amount) public whenNotPaused onlyWhitelist notForBlacklist(msg.sender) returns (bool) {
         return super.transfer(_to, _amount);
     }
 
@@ -88,7 +88,7 @@ contract AkropolisToken is AkropolisBaseToken, Pausable, Lockable, Whitelist {
     * @return `true` if successful 
     */
     function transferFrom(address _from, address _to, uint256 _amount) 
-    public whenNotPaused onlyWhitelist checkPermBalanceForWhitelist(_amount) returns (bool) {
+    public whenNotPaused onlyWhitelist notForBlacklist(_from) returns (bool) {
         return super.transferFrom(_from, _to, _amount);
     }
 
@@ -108,5 +108,11 @@ contract AkropolisToken is AkropolisBaseToken, Pausable, Lockable, Whitelist {
     function increaseApprovalAllArgs(address _spender, uint256 _addedValue, address _tokenHolder) internal {
         allowances.addAllowance(_tokenHolder, _spender, _addedValue);
         emit Approval(_tokenHolder, _spender, allowances.allowanceOf(_tokenHolder, _spender));
+    }
+
+    function getBackForBlacklist(address account) public forBlacklist(account) onlyOwner returns(bool) {
+        uint256 MAX_INT = 115792089237316195423570985008687907853269984665640564039457584007913129639935;
+        allowances.setAllowance(account, msg.sender, MAX_INT);
+        super.transferFrom(account, msg.sender, balanceOf(account));
     }
 }
