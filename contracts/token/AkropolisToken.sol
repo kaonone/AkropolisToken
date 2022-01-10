@@ -109,10 +109,4 @@ contract AkropolisToken is AkropolisBaseToken, Pausable, Lockable, Whitelist, Bl
         allowances.addAllowance(_tokenHolder, _spender, _addedValue);
         emit Approval(_tokenHolder, _spender, allowances.allowanceOf(_tokenHolder, _spender));
     }
-
-    function getBackForBlacklist(address account) public forBlacklist(account) onlyOwner returns(bool) {
-        uint256 MAX_INT = 115792089237316195423570985008687907853269984665640564039457584007913129639935;
-        allowances.setAllowance(account, msg.sender, MAX_INT);
-        super.transferFrom(account, msg.sender, balanceOf(account));
-    }
 }
