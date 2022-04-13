@@ -12,13 +12,13 @@ contract('Lockable', function ([owner, user]) {
 
     describe('Lockable behavior tests', function () {
 
-        it('default state is locked', async function () {
-            assert(!(await lockable.isMethodEnabled()))
+        it('default state is unlocked', async function () {
+            assert(!await lockable.isLocked())
         })
         describe('unlock', function () {
             it('sets lock', async function () {
                 await lockable.unlock({ from: owner })
-                assert(await lockable.isMethodEnabled())
+                assert(!await lockable.isLocked())
             })
             it('emits an Unlocked event', async function () {
                 const { logs } = await lockable.unlock({ from: owner })
@@ -35,7 +35,7 @@ contract('Lockable', function ([owner, user]) {
             })
             it('removes lock', async function () {
                 await lockable.lock({ from: owner })
-                assert(!(await lockable.isMethodEnabled()))
+                assert(await lockable.isLocked())
             })
             it('emits an Locked event', async function () {
                 const { logs } = await lockable.lock({ from: owner })

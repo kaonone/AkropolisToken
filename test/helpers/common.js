@@ -2,8 +2,9 @@
 const expectThrow = require('./expectThrow');
 const assertBalance = require('./assertBalance');
 const timetravel = require('./timetravel')
-const ZERO_ADDRESS = 0x0000000000000000000000000000000000000000;
-const RANDOM_ADDRESS = 0x3b5855bAEF50EBFdFC89c5E5463f92BCe194EAc9; 
+const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
+const RANDOM_ADDRESS = '0x3b5855bAEF50EBFdFC89c5E5463f92BCe194EAc9'; 
+const toBN = web3.utils.toBN;
 
 /* Creating a class with all common Variables */
 class CommonVariables {
@@ -40,5 +41,6 @@ module.exports = {
     AkropolisBaseToken,
     AkropolisToken,
     TokenProxy,
-    TokenProxyDelayed
+    TokenProxyDelayed,
+    toBN,
 }

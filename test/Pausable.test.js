@@ -1,11 +1,7 @@
 const { expectThrow } = require('./helpers/common');
 const PausableMock = artifacts.require('PausableMock');
 
-const BigNumber = web3.BigNumber;
-
-require('chai')
-  .use(require('chai-bignumber')(BigNumber))
-  .should();
+require('chai').should();
 
 contract('Pausable', function () {
   beforeEach(async function () {
@@ -13,18 +9,18 @@ contract('Pausable', function () {
   });
 
   it('can perform normal process in non-pause', async function () {
-    (await this.Pausable.count()).should.be.bignumber.equal(0);
+    (await this.Pausable.count()).toNumber().should.equal(0);
 
     await this.Pausable.normalProcess();
-    (await this.Pausable.count()).should.be.bignumber.equal(1);
+    (await this.Pausable.count()).toNumber().should.equal(1);
   });
 
   it('can not perform normal process in pause', async function () {
     await this.Pausable.pause();
-    (await this.Pausable.count()).should.be.bignumber.equal(0);
+    (await this.Pausable.count()).toNumber().should.equal(0);
 
     await expectThrow(this.Pausable.normalProcess());
-    (await this.Pausable.count()).should.be.bignumber.equal(0);
+    (await this.Pausable.count()).toNumber().should.equal(0);
   });
 
   it('can not take drastic measure in non-pause', async function () {
@@ -42,7 +38,7 @@ contract('Pausable', function () {
     await this.Pausable.pause();
     await this.Pausable.unpause();
     await this.Pausable.normalProcess();
-    (await this.Pausable.count()).should.be.bignumber.equal(1);
+    (await this.Pausable.count()).toNumber().should.equal(1);
   });
 
   it('should prevent drastic measure after pause is over', async function () {

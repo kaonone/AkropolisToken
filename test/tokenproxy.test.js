@@ -1,4 +1,5 @@
-const { CommonVariables, ZERO_ADDRESS, expectThrow } = require('./helpers/common')
+const { assert } = require('chai');
+const { CommonVariables, ZERO_ADDRESS, expectThrow, toBN } = require('./helpers/common')
 
 const { TokenProxy, AkropolisBaseToken, AkropolisToken, BalanceSheet, AllowanceSheet } = require('./helpers/common');
 
@@ -7,6 +8,7 @@ contract('TokenProxy', _accounts => {
     const owner = commonVars.owner;
     const proxyOwner = commonVars.user;
     const user = commonVars.user2;
+    const spender = commonVars.user3;
 
     beforeEach(async function () {
         // Empty Proxy Data storage
@@ -14,10 +16,25 @@ contract('TokenProxy', _accounts => {
         this.allowances = await AllowanceSheet.new({ from: owner })
         
         // First logic contract
-        this.impl_AkropolisBaseToken = (await AkropolisBaseToken.new(ZERO_ADDRESS, ZERO_ADDRESS, { from:owner })).address
+        this.impl_AkropolisBaseToken = (await AkropolisBaseToken.new(
+          ZERO_ADDRESS,
+          ZERO_ADDRESS,
+          '',
+          0,
+          '',
+          { from: owner },
+        )).address
 
         // Setting up Proxy initially at version 0 with data storage
-        this.proxy = await TokenProxy.new(this.impl_AkropolisBaseToken, this.balances.address, this.allowances.address, { from:proxyOwner })
+        this.proxy = await TokenProxy.new(
+          this.impl_AkropolisBaseToken,
+          this.balances.address,
+          this.allowances.address,
+          '',
+          0,
+          '',
+          { from:proxyOwner },
+        )
         this.proxyAddress = this.proxy.address
 
     })
@@ -32,7 +49,7 @@ contract('TokenProxy', _accounts => {
 
     describe('Proxy delegates calls to AkropolisBaseToken logic contract', function () {
         beforeEach(async function () {
-            this.tokenProxy = AkropolisBaseToken.at(this.proxyAddress)
+            this.tokenProxy = await AkropolisBaseToken.at(this.proxyAddress)
 
             await this.allowances.transferOwnership(this.tokenProxy.address)
             await this.balances.transferOwnership(this.tokenProxy.address)
@@ -40,8 +57,8 @@ contract('TokenProxy', _accounts => {
             await this.tokenProxy.claimAllowanceOwnership()
         })
         it('tokenProxy owns data storages', async function () {
-            assert.equal(await this.tokenProxy.address, await this.allowances.owner())
-            assert.equal(await this.tokenProxy.address, await this.balances.owner())
+            assert.equal(this.tokenProxy.address, await this.allowances.owner())
+            assert.equal(this.tokenProxy.address, await this.balances.owner())
         })
         describe('totalSupply', function () {
             it('returns totalSupply', async function () {
@@ -50,11 +67,11 @@ contract('TokenProxy', _accounts => {
             })
         })
         describe('approve is enabled in AkropolisBaseToken', function () {
-            const amount = 10 * 10 ** 18
+            const amount = toBN(10 * 10 ** 18);
             it('approves user to spend for token holder', async function () {
                 await this.tokenProxy.approve(user, amount, { from: proxyOwner })
                 const allowance = await this.tokenProxy.allowance(proxyOwner, user)
-                assert.equal(allowance, amount)
+                assert(allowance.eq(amount))
             }) 
         })
     })
@@ -63,7 +80,14 @@ contract('TokenProxy', _accounts => {
 
         beforeEach(async function () {
             // Second logic contract
-            this.impl_AkropolisToken = (await AkropolisToken.new(ZERO_ADDRESS, ZERO_ADDRESS, { from:owner })).address
+            this.impl_AkropolisToken = (await AkropolisToken.new(
+              ZERO_ADDRESS,
+              ZERO_ADDRESS,
+              '',
+              0,
+              '',
+              { from:owner },
+            )).address
         })
         describe('owner calls upgradeTo', function () {
             const from = proxyOwner
@@ -91,8 +115,8 @@ contract('TokenProxy', _accounts => {
         })
         describe('Proxy can now delegate calls to AkropolisToken logic contract', function () {
             beforeEach(async function () {
-                await this.proxy.upgradeTo(this.impl_AkropolisToken, { from:proxyOwner })
-                this.tokenProxy = AkropolisToken.at(this.proxyAddress)
+                await this.proxy.upgradeTo(this.impl_AkropolisToken, { from: proxyOwner })
+                this.tokenProxy = await AkropolisToken.at(this.proxyAddress)
 
                 await this.allowances.transferOwnership(this.tokenProxy.address)
                 await this.balances.transferOwnership(this.tokenProxy.address)
@@ -111,16 +135,27 @@ contract('TokenProxy', _accounts => {
                     assert.equal(supply, 0)
                 })
             })
-            describe('approve is disabled by default in AkropolisToken', function () {
-                const amount = 10 * 10 ** 18
-                it('reverts', async function () {
-                    await expectThrow(this.tokenProxy.approve(user, amount, { from: proxyOwner }))
-                }) 
+            describe('approve', function () {
+                const amount = toBN(10 * 10 ** 18)
+                beforeEach(async function () {
+                  await this.tokenProxy.mint(user, amount, { from: proxyOwner })
+                })
+                it('approve is enabled by default in AkropolisToken', async function () {
+                    await this.tokenProxy.approve(spender, amount, { from: user })
+                    const allowance = await this.tokenProxy.allowance(user, spender)
+                    assert(allowance.eq(amount));
+                })
+                it('approve reverts when contract is locked', async function () {
+                  await this.tokenProxy.lock({ from: proxyOwner })
+                  await expectThrow(this.tokenProxy.approve(spender, amount, { from: user }))
+                })
             })
             describe('increaseApproval now enabled in AkropolisToken', function () {
-                const amount = 10 * 10 ** 18
+                const amount = toBN(10 * 10 ** 18);
                 it('increases user allowance', async function () {
-                    await this.tokenProxy.increaseApproval(user, amount, { from: proxyOwner })
+                    await this.tokenProxy.increaseApproval(spender, amount, { from: user })
+                    const allowance = await this.tokenProxy.allowance(user, spender)
+                    assert(allowance.eq(amount));
                 }) 
             })
         })
