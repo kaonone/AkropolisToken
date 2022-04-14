@@ -462,7 +462,7 @@ function AkropolisToken_Tests(owner, tokenHolder, otherAccount) {
                     it('burns the requested amount', async function () {
                       const totalSupplyBeforeBurn = await this.AkropolisToken.totalSupply();
                       await this.AkropolisToken.burn(amountToBurn, { from: owner })
-                      assertBalance(this.AkropolisToken, owner, amountAfterBurn)
+                      await assertBalance(this.AkropolisToken, owner, amountAfterBurn)
                       assert((await this.AkropolisToken.totalSupply()).eq(totalSupplyBeforeBurn.sub(amountToBurn)))
                     })
                     
@@ -608,7 +608,7 @@ function AkropolisToken_Tests(owner, tokenHolder, otherAccount) {
 
         describe('--LockableToken Tests--', function () {
             
-            describe('default beheavior', function () {
+            describe('default behavior', function () {
                 it('locked methods are unlocked by default', async function () {
                     const locked = await this.AkropolisToken.isLocked()
                     assert.equal(locked, false)

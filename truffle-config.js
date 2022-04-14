@@ -7,16 +7,17 @@ module.exports = {
   // to customize your Truffle configuration!
     plugins: ["truffle-plugin-verify"],
   	compilers: {
-		solc: {
-	  	version: "0.4.24"  // Change this to whatever you need
-		}
+      solc: {
+        version: "0.4.24"  // Change this to whatever you need
+      }
   	},
 	networks: {
 		development: {
 			host: 'localhost',
 			port: 8545,
 			network_id: '*',
-			gas: 4600000
+			gas: 5000000,
+      gasPrice: 55000000000
 		},
 
 		mainnet: {
@@ -53,5 +54,5 @@ module.exports = {
 
 	api_keys: {
 		etherscan: process.env.ETHERSCAN_API_KEY
-	  }
+	}
 };

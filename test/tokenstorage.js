@@ -1,7 +1,6 @@
 const { expectThrow, toBN } = require('./helpers/common');
 
 function TokenStorageTests(owner, tokenHolder, spender) {
-
     describe('TokenStorage behavior tests', function () {
         const from = owner
         beforeEach(async function () {

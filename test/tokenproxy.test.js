@@ -77,7 +77,6 @@ contract('TokenProxy', _accounts => {
     })
 
     describe('upgradeTo AkropolisToken', function () {
-
         beforeEach(async function () {
             // Second logic contract
             this.impl_AkropolisToken = (await AkropolisToken.new(

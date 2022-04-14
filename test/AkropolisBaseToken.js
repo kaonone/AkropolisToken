@@ -264,7 +264,7 @@ function AkropolisBaseToken_Tests(owner, tokenHolder, otherAccount) {
                 it('burns the requested amount', async function () {
                     const totalSupplyBeforeBurn = await this.AkropolisBaseToken.totalSupply();
                     await this.AkropolisBaseToken.burn(amountToBurn, { from: owner })
-                    assertBalance(this.AkropolisBaseToken, owner, amountAfterBurn)
+                    await assertBalance(this.AkropolisBaseToken, owner, amountAfterBurn)
                     assert((await this.AkropolisBaseToken.totalSupply()).eq(totalSupplyBeforeBurn.sub(amountToBurn)))
                 })
                 
@@ -301,7 +301,7 @@ function AkropolisBaseToken_Tests(owner, tokenHolder, otherAccount) {
 
                 it('mints the requested amount', async function () {
                     await this.AkropolisBaseToken.mint(tokenHolder, amount, { from:minter })
-                    assertBalance(this.AkropolisBaseToken, tokenHolder, amountAfterMint)
+                    await assertBalance(this.AkropolisBaseToken, tokenHolder, amountAfterMint)
                     assert((await this.AkropolisBaseToken.totalSupply()).eq(amountAfterMint))
                 })
                 
@@ -325,6 +325,64 @@ function AkropolisBaseToken_Tests(owner, tokenHolder, otherAccount) {
                 it('reverts', async function () {
                     await expectThrow(this.AkropolisBaseToken.mint(tokenHolder, amount, { from:minter }))
                 })
+            })
+
+            describe('mintFinished', function () {
+              beforeEach(async function () {
+                await this.AkropolisBaseToken.mintStarted({ from: owner })
+              })
+
+              it('changes isMintingFinished to true', async function () {
+                await this.AkropolisBaseToken.mintFinished({ from: owner })
+                const isMintingFinished = await this.AkropolisBaseToken.isMintingFinished()
+                assert(isMintingFinished)
+              })
+
+              it('reverts minting when isMintingFinished', async function () {
+                await this.AkropolisBaseToken.mintFinished({ from: owner })
+                await expectThrow(this.AkropolisBaseToken.mint(tokenHolder, amount, { from: owner }))
+              })
+
+              it('reverts if non owner calls', async function () {
+                await expectThrow(this.AkropolisBaseToken.mintFinished({ from: tokenHolder }))
+              })
+
+              it('emits MintFinished event', async function () {
+                const { logs } = await this.AkropolisBaseToken.mintFinished({ from: owner })
+                
+                assert.equal(logs.length, 1)
+                assert.equal(logs[0].event, 'MintFinished')
+              })
+            })
+
+            describe('mintStarted', function () {
+              beforeEach(async function () {
+                await this.AkropolisBaseToken.mintFinished({ from: owner })
+              })
+
+              it('changes isMintingFinished to false', async function () {
+                await this.AkropolisBaseToken.mintStarted({ from: owner })
+                const isMintingFinished = await this.AkropolisBaseToken.isMintingFinished()
+                assert(!isMintingFinished)
+              })
+
+              it('enables minting when isMintingFinished is false', async function () {
+                await this.AkropolisBaseToken.mintStarted({ from: owner })
+                const balanceBeforeMint =  await this.AkropolisBaseToken.balanceOf(tokenHolder)
+                await this.AkropolisBaseToken.mint(tokenHolder, amount, { from: owner })
+                await assertBalance(this.AkropolisBaseToken, tokenHolder, balanceBeforeMint.add(amount))
+              })
+
+              it('reverts if non owner calls', async function () {
+                await expectThrow(this.AkropolisBaseToken.mintStarted({ from: tokenHolder }))
+              })
+
+              it('emits MintStarted event', async function () {
+                const { logs } = await this.AkropolisBaseToken.mintStarted({ from: owner })
+                
+                assert.equal(logs.length, 1)
+                assert.equal(logs[0].event, 'MintStarted')
+              })
             })
         })
         

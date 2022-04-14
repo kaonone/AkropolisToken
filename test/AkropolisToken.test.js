@@ -20,7 +20,7 @@ contract('AkropolisToken', _accounts => {
         '',
         0,
         '',
-        { from: owner, gas: 5000000 },
+        { from: owner },
       )
 
       // If Token does not own storage contracts, then the storage contracts must

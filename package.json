@@ -14,7 +14,9 @@
     "test-lockable": "truffle test ./test/Lockable.test.js",
     "test-upgradeability": "truffle test ./test/DelayedUpgradeabilityProxy.test.js",
     "test-proxy-delayed": "truffle test ./test/tokenproxy-delayed.test.js",
-    "test-all": "truffle test"
+    "test-fork": "truffle test ./testFork/*",
+    "test-all": "truffle test",
+    "deploy": "truffle migrate"
   },
   "author": "",
   "license": "ISC",
