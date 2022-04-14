@@ -56,7 +56,8 @@ cd AkropolisToken
 
 - start Ganache in a separate terminal `scripts/rpc_fork.sh`
 - run all tests with `npm run test-fork`
-- Ganache will fork from Mainnet starting from a specific block number configured in `scripts/rpc_fork.sh`.
+- Ganache will fork from Mainnet starting from a specific block number configured in `scripts/rpc_fork.sh`
+- make sure to restart Ganache before launching tests
 
 ### Deployment
 

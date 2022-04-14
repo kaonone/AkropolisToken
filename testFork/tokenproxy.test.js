@@ -13,7 +13,26 @@ contract('TokenProxy', (accounts) => {
   const tokenProxy = '0x8Ab7404063Ec4DBcfd4598215992DC3F8EC853d7';
   const proxyOwner = '0xC5aF91F7D10dDe118992ecf536Ed227f276EC60D';
   const oldImplAddress = '0xeaa04ea9a674d755b9c2fd988d01f7a1c9d116da';
+  const blackListedUser = '0x918f2685519a46df7042e60ccdf5bb237ae8e3cc';
   const amount = toBN(10 * 10 ** 18);
+
+  const getBackForBlacklist = (account, sender = proxyOwner) => {
+    const data = web3.eth.abi.encodeFunctionCall(
+      {
+        name: 'getBackForBlacklist',
+        inputs: [{ name: 'account', type: 'address' }],
+        outputs: [{ name: '', type: 'bool' }],
+        type: 'function',
+      },
+      [account]
+    );
+    return web3.eth.sendTransaction({
+      from: sender,
+      to: tokenProxy,
+      data,
+      gas: 20000000,
+    });
+  };
 
   before(async function () {
     this.proxy = await TokenProxy.at(tokenProxy);
@@ -24,7 +43,7 @@ contract('TokenProxy', (accounts) => {
     const balances = await this.oldTokenProxy.balances();
 
     await Promise.all(
-      tokenHolders.map((user) =>
+      [...tokenHolders, proxyOwner, blackListedUser].map((user) =>
         web3.eth.sendTransaction({
           from: accounts[1],
           to: user,
@@ -54,6 +73,15 @@ contract('TokenProxy', (accounts) => {
   });
 
   describe('Mainnet TokenProxy tests', function () {
-    TokenProxyTests({ newUser, tokenHolders, tokenProxy, proxyOwner, oldImplAddress, amount });
+    TokenProxyTests({
+      newUser,
+      tokenHolders,
+      tokenProxy,
+      proxyOwner,
+      oldImplAddress,
+      amount,
+      blackListedUser,
+      getBackForBlacklist,
+    });
   });
 });

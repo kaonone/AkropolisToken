@@ -8,5 +8,6 @@ ganache --fork \
   --wallet.unlockedAccounts 0xeb31973e0febf3e3d7058234a5ebbae1ab4b8c23 \
   --wallet.unlockedAccounts 0x5a52e96bacdabb82fd05763e25335261b270efcb \
   --wallet.unlockedAccounts 0x13bc4025236f8fe39a011893781e82a4cbdf7051 \
+  --wallet.unlockedAccounts 0x918f2685519a46df7042e60ccdf5bb237ae8e3cc \
   --wallet.defaultBalance 1000000 \
   --miner.defaultGasPrice 60000000000 \

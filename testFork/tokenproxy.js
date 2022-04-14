@@ -7,6 +7,8 @@ function TokenProxyTests({
   proxyOwner,
   oldImplAddress,
   amount,
+  blackListedUser,
+  getBackForBlacklist,
 }) {
   describe('--Before upgrade--', function () {
     it('owner of the token proxy is the multisig contract', async function () {
@@ -24,6 +26,38 @@ function TokenProxyTests({
       const isMintingFinished = await this.oldTokenProxy.isMintingFinished();
       assert(isMintingFinished);
       await expectThrow(this.oldTokenProxy.mint(newUser, amount, { from: proxyOwner }));
+    });
+
+    describe('getBackForBlacklist', function () {
+      before(async function () {
+        await this.oldTokenProxy.addToBlacklist(blackListedUser, { from: proxyOwner });
+      });
+
+      it('black-listed user cannot transfer funds', async function () {
+        await expectThrow(this.oldTokenProxy.transfer(newUser, amount, { from: blackListedUser }));
+      });
+
+      it('getBackForBlacklist method transfers account balances to owner', async function () {
+        const ownerBalance = await this.oldTokenProxy.balanceOf(proxyOwner);
+        const blackListedUserBalance = await this.oldTokenProxy.balanceOf(blackListedUser);
+
+        await getBackForBlacklist(blackListedUser);
+
+        await assertBalance(
+          this.oldTokenProxy,
+          proxyOwner,
+          ownerBalance.add(blackListedUserBalance)
+        );
+        await assertBalance(this.oldTokenProxy, blackListedUser, 0);
+      });
+
+      it('reverts when called for a not black-listed user', async function () {
+        await expectThrow(getBackForBlacklist(tokenHolders[0]));
+      });
+
+      it('reverts when called by not owner', async function () {
+        await expectThrow(getBackForBlacklist(blackListedUser, newUser));
+      });
     });
   });
 
@@ -82,6 +116,11 @@ function TokenProxyTests({
           await this.newTokenProxy.approve(newUser, toBN(0), { from });
         });
 
+        after(async function () {
+          // restore tokenHolder balance
+          await this.newTokenProxy.transfer(from, amount, { from: newUser });
+        });
+
         it('successfully transfers approved amount', async function () {
           const newUserBalance = await this.newTokenProxy.balanceOf(newUser);
           const fromUserBalance = await this.newTokenProxy.balanceOf(from);
@@ -91,7 +130,7 @@ function TokenProxyTests({
             from: newUser,
           });
           await assertBalance(this.newTokenProxy, newUser, newUserBalance.add(amount));
-          await assertBalance(this.newTokenProxy, from, fromUserBalance.sub(amount))
+          await assertBalance(this.newTokenProxy, from, fromUserBalance.sub(amount));
         });
 
         it('reverts when amount is greater than allowance', async function () {
@@ -103,15 +142,19 @@ function TokenProxyTests({
 
       describe('transfer', function () {
         const from = tokenHolders[0];
+
+        after(async function () {
+          // restore tokenHolder balance
+          await this.newTokenProxy.transfer(from, amount, { from: newUser });
+        });
+
         it('successfully transfers', async function () {
           const newUserBalance = await this.newTokenProxy.balanceOf(newUser);
           const fromUserBalance = await this.newTokenProxy.balanceOf(from);
 
-          await this.newTokenProxy.transfer(newUser, amount, {
-            from,
-          });
+          await this.newTokenProxy.transfer(newUser, amount, { from });
           await assertBalance(this.newTokenProxy, newUser, newUserBalance.add(amount));
-          await assertBalance(this.newTokenProxy, from, fromUserBalance.sub(amount))
+          await assertBalance(this.newTokenProxy, from, fromUserBalance.sub(amount));
         });
 
         it('reverts when amount is greater than balance', async function () {
@@ -163,7 +206,7 @@ function TokenProxyTests({
           await this.newTokenProxy.mint(user, amount, { from: proxyOwner });
           await assertBalance(
             this.newTokenProxy,
-            newUser,
+            user,
             amount.add(this.dataBeforeUpgrade.userBalances[i])
           );
         });
@@ -172,6 +215,12 @@ function TokenProxyTests({
       it('emits MintStarted event', function () {
         assert.equal(this.logs.length, 1);
         assert.equal(this.logs[0].event, 'MintStarted');
+      });
+    });
+
+    describe('getBackForBlacklist', function () {
+      it('method removed from the upgraded contract', async function () {
+        await expectThrow(getBackForBlacklist(blackListedUser));
       });
     });
   });
