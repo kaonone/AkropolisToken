@@ -21,10 +21,25 @@ contract('TokenProxyDelayed', _accounts => {
         this.allowances = await AllowanceSheet.new({ from: owner })
         
         // First logic contract
-        this.impl_AkropolisBaseToken = (await AkropolisBaseToken.new(ZERO_ADDRESS, ZERO_ADDRESS, { from:owner })).address
+        this.impl_AkropolisBaseToken = (await AkropolisBaseToken.new(
+          ZERO_ADDRESS,
+          ZERO_ADDRESS,
+          '',
+          0,
+          '',
+          { from:owner },
+        )).address
 
         // Setting up Proxy initially at version 0 with data storage
-        this.proxy = await TokenProxyDelayed.new(this.impl_AkropolisBaseToken, this.balances.address, this.allowances.address, { from:proxyOwner })
+        this.proxy = await TokenProxyDelayed.new(
+          this.impl_AkropolisBaseToken,
+          this.balances.address,
+          this.allowances.address,
+          '',
+          0,
+          '',
+          { from:proxyOwner }
+        )
         this.proxyAddress = this.proxy.address
     })
 
@@ -38,7 +53,7 @@ contract('TokenProxyDelayed', _accounts => {
 
     describe('Proxy delegates calls to AkropolisBaseToken logic contract', function () {
         beforeEach(async function () {
-            this.tokenProxy = AkropolisBaseToken.at(this.proxyAddress)
+            this.tokenProxy = await AkropolisBaseToken.at(this.proxyAddress)
 
             await this.allowances.transferOwnership(this.tokenProxy.address)
             await this.balances.transferOwnership(this.tokenProxy.address)
@@ -56,7 +71,7 @@ contract('TokenProxyDelayed', _accounts => {
     //         })
     //     })
     //     describe('approve is enabled in AkropolisBaseToken', function () {
-    //         const amount = 10 * 10 ** 18
+    //         const amount = toBN(10 * 10 ** 18)
     //         it('approves user to spend for token holder', async function () {
     //             await this.tokenProxy.approve(user, amount, { from: proxyOwner })
     //             const allowance = await this.tokenProxy.allowance(proxyOwner, user)
@@ -69,8 +84,15 @@ contract('TokenProxyDelayed', _accounts => {
 
         beforeEach(async function () {
             // Second logic contract
-            this.impl_AkropolisToken = (await AkropolisToken.new(ZERO_ADDRESS, ZERO_ADDRESS, { from:owner })).address
-            this.tokenProxy = AkropolisToken.at(this.proxyAddress)
+            this.impl_AkropolisToken = (await AkropolisToken.new(
+              ZERO_ADDRESS,
+              ZERO_ADDRESS,
+              '',
+              0,
+              '',
+              { from:owner }
+            )).address
+            this.tokenProxy = await AkropolisToken.at(this.proxyAddress)
 
             await this.allowances.transferOwnership(this.tokenProxy.address)
             await this.balances.transferOwnership(this.tokenProxy.address)
@@ -126,13 +148,13 @@ contract('TokenProxyDelayed', _accounts => {
         //         })
         //     })
         //     describe('approve is disabled by default in AkropolisToken', function () {
-        //         const amount = 10 * 10 ** 18
+        //         const amount = toBN(10 * 10 ** 18)
         //         it('reverts', async function () {
         //             await expectThrow(this.tokenProxy.approve(user, amount, { from: proxyOwner }))
         //         }) 
         //     })
         //     describe('increaseApproval now enabled in AkropolisToken', function () {
-        //         const amount = 10 * 10 ** 18
+        //         const amount = toBN(10 * 10 ** 18)
         //         it('increases user allowance', async function () {
         //             await this.tokenProxy.increaseApproval(user, amount, { from: proxyOwner })
         //         }) 

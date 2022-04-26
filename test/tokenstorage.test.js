@@ -1,6 +1,6 @@
-const { CommonVariables, ZERO_ADDRESS } = require('./helpers/common');
+const { CommonVariables } = require('./helpers/common');
 
-const { TokenStorage, BalanceSheet, AllowanceSheet } = require('./helpers/common');
+const { BalanceSheet, AllowanceSheet } = require('./helpers/common');
 
 const { TokenStorageTests } = require('./tokenstorage.js');
 

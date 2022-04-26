@@ -1,10 +1,10 @@
-const { assertBalance, expectThrow, ZERO_ADDRESS } = require('./helpers/common');
+const { assertBalance, expectThrow, ZERO_ADDRESS, toBN } = require('./helpers/common');
 
 function AkropolisBaseToken_Tests(owner, tokenHolder, otherAccount) {
     describe("Behaves properly like a Burnable, Mintable, Standard ERC20 token", function () {
         beforeEach(async function () {
-            this.initialSeed = 10 * 10 ** 18
-            await this.AkropolisBaseToken.mint(tokenHolder, this.initialSeed, {from:owner})
+            this.initialSeed = toBN(10 * 10 ** 18)
+            await this.AkropolisBaseToken.mint(tokenHolder, this.initialSeed, { from: owner })
         });
         describe('--BasicToken Tests--', function () {
             describe('total supply', function () {
@@ -33,7 +33,7 @@ function AkropolisBaseToken_Tests(owner, tokenHolder, otherAccount) {
                     const to = otherAccount
                     
                     describe('when the sender does not have enough balance', function () {
-                        const amount = 11 * 10 ** 18
+                        const amount = toBN(11 * 10 ** 18)
                         
                         it('reverts', async function () {
                             await expectThrow(this.AkropolisBaseToken.transfer(to, amount, { from: tokenHolder }))
@@ -41,7 +41,7 @@ function AkropolisBaseToken_Tests(owner, tokenHolder, otherAccount) {
                     })
                     
                     describe('when the sender has enough balance', function () {
-                        const amount = 10 * 10 ** 18
+                        const amount = toBN(10 * 10 ** 18)
                         
                         it('transfers the requested amount', async function () {
                             await this.AkropolisBaseToken.transfer(to, amount, { from: tokenHolder })
@@ -69,7 +69,7 @@ function AkropolisBaseToken_Tests(owner, tokenHolder, otherAccount) {
                     const spender = otherAccount
                     
                     describe('when the sender has enough balance', function () {
-                        const amount = 10 * 10 ** 18
+                        const amount = toBN(10 * 10 ** 18)
                         
                         it('emits an approval event', async function () {
                             const { logs } = await this.AkropolisBaseToken.approve(spender, amount, { from: tokenHolder })
@@ -105,7 +105,7 @@ function AkropolisBaseToken_Tests(owner, tokenHolder, otherAccount) {
                     })
                     
                     describe('when the sender does not have enough balance', function () {
-                        const amount = 11 * 10 ** 18
+                        const amount = toBN(11 * 10 ** 18)
                         
                         it('emits an approval event', async function () {
                             const { logs } = await this.AkropolisBaseToken.approve(spender, amount, { from: tokenHolder })
@@ -142,7 +142,7 @@ function AkropolisBaseToken_Tests(owner, tokenHolder, otherAccount) {
                 })
                 
                 describe('when the spender is the zero address', function () {
-                    const amount = 10 * 10 ** 18
+                    const amount = toBN(10 * 10 ** 18)
                     const spender = ZERO_ADDRESS
                     
                     it('approves the requested amount', async function () {
@@ -173,11 +173,11 @@ function AkropolisBaseToken_Tests(owner, tokenHolder, otherAccount) {
                     
                     describe('when the spender has enough approved balance', function () {
                         beforeEach(async function () {
-                            await this.AkropolisBaseToken.approve(spender, 10 * 10 ** 18, { from: tokenHolder })
+                            await this.AkropolisBaseToken.approve(spender, toBN(10 * 10 ** 18), { from: tokenHolder })
                         })
                         
                         describe('when the token holder has enough balance', function () {
-                            const amount = 10 * 10 ** 18
+                            const amount = toBN(10 * 10 ** 18)
                             
                             it('transfers the requested amount', async function () {
                                 await this.AkropolisBaseToken.transferFrom(tokenHolder, to, amount, { from: spender })
@@ -189,7 +189,7 @@ function AkropolisBaseToken_Tests(owner, tokenHolder, otherAccount) {
                                 await this.AkropolisBaseToken.transferFrom(tokenHolder, to, amount, { from: spender })
                                 
                                 const allowance = await this.AkropolisBaseToken.allowance(tokenHolder, spender)
-                                assert(allowance.eq(0))
+                                assert(allowance.isZero())
                             })
                             
                             it('emits a transfer event', async function () {
@@ -206,7 +206,7 @@ function AkropolisBaseToken_Tests(owner, tokenHolder, otherAccount) {
                         })
                         
                         describe('when the token holder does not have enough balance', function () {
-                            const amount = 11 * 10 ** 18
+                            const amount = toBN(11 * 10 ** 18)
                             
                             it('reverts', async function () {
                                 await expectThrow(this.AkropolisBaseToken.transferFrom(tokenHolder, to, amount, { from: spender }))
@@ -216,11 +216,11 @@ function AkropolisBaseToken_Tests(owner, tokenHolder, otherAccount) {
                     
                     describe('when the spender does not have enough approved balance', function () {
                         beforeEach(async function () {
-                            await this.AkropolisBaseToken.approve(spender, 9 * 10 ** 18, { from: tokenHolder })
+                            await this.AkropolisBaseToken.approve(spender, toBN(9 * 10 ** 18), { from: tokenHolder })
                         })
                         
                         describe('when the token holder has enough balance', function () {
-                            const amount = 10 * 10 ** 18
+                            const amount = toBN(10 * 10 ** 18)
                             
                             it('reverts', async function () {
                                 await expectThrow(this.AkropolisBaseToken.transferFrom(tokenHolder, to, amount, { from: spender }))
@@ -228,7 +228,7 @@ function AkropolisBaseToken_Tests(owner, tokenHolder, otherAccount) {
                         })
                         
                         describe('when the token holder does not have enough balance', function () {
-                            const amount = 11 * 10 ** 18
+                            const amount = toBN(11 * 10 ** 18)
                             
                             it('reverts', async function () {
                                 await expectThrow(this.AkropolisBaseToken.transferFrom(tokenHolder, to, amount, { from: spender }))
@@ -238,7 +238,7 @@ function AkropolisBaseToken_Tests(owner, tokenHolder, otherAccount) {
                 })
                 
                 describe('when the recipient is the zero address', function () {
-                    const amount = 10 * 10 ** 18
+                    const amount = toBN(10 * 10 ** 18)
                     const to = ZERO_ADDRESS
                     
                     beforeEach(async function () {
@@ -253,42 +253,47 @@ function AkropolisBaseToken_Tests(owner, tokenHolder, otherAccount) {
             })
         })
         describe('--BurnableToken Tests--', function () {
-            const from = tokenHolder
-            
-            describe('when the given amount is not greater than balance of the sender', function () {
-                const amount = 1 * 10 ** 18
-                const amountAfterBurn = 9 * 10 ** 18
+            describe('when the given amount is not greater than balance of the owner', function () {
+                const amountToBurn = toBN(1 * 10 ** 18)
+                const amountAfterBurn = toBN(9 * 10 ** 18)
+
+                beforeEach(async function () {
+                  await this.AkropolisBaseToken.mint(owner, amountToBurn.add(amountAfterBurn), { from: owner })
+                });
                 
                 it('burns the requested amount', async function () {
-                    await this.AkropolisBaseToken.burn(amount, { from })
-                    const balance = await this.AkropolisBaseToken.balanceOf(from)
-                    assertBalance(this.AkropolisBaseToken, tokenHolder, amountAfterBurn)
-                    assert((await this.AkropolisBaseToken.totalSupply()).eq(amountAfterBurn))
+                    const totalSupplyBeforeBurn = await this.AkropolisBaseToken.totalSupply();
+                    await this.AkropolisBaseToken.burn(amountToBurn, { from: owner })
+                    await assertBalance(this.AkropolisBaseToken, owner, amountAfterBurn)
+                    assert((await this.AkropolisBaseToken.totalSupply()).eq(totalSupplyBeforeBurn.sub(amountToBurn)))
                 })
                 
                 it('emits a burn event', async function () {
-                    const { logs } = await this.AkropolisBaseToken.burn(amount, { from })
+                    const { logs } = await this.AkropolisBaseToken.burn(amountToBurn, { from: owner })
                     assert.equal(logs.length, 2)
                     assert.equal(logs[0].event, 'Burn')
-                    assert.equal(logs[0].args.burner, tokenHolder)
-                    assert(logs[0].args.value.eq(amount))
+                    assert.equal(logs[0].args.burner, owner)
+                    assert(logs[0].args.value.eq(amountToBurn))
                     
                     assert.equal(logs[1].event, 'Transfer')
-                    assert.equal(logs[1].args.from, tokenHolder)
+                    assert.equal(logs[1].args.from, owner)
                     assert.equal(logs[1].args.to, ZERO_ADDRESS)
-                    assert(logs[1].args.value.eq(amount))
+                    assert(logs[1].args.value.eq(amountToBurn))
                 })
             })
-            describe('when the given amount is greater than balance of the sender', function () {
-                const amount = 11 * 10 ** 18
-                it('reverts', async function () {
-                    await expectThrow(this.AkropolisBaseToken.burn(amount, { from }))
+            describe('reverts', function () {
+                const amount = toBN(11 * 10 ** 18)
+                it('when the given amount is greater than balance of the owner', async function () {
+                    await expectThrow(this.AkropolisBaseToken.burn(amount, { from: owner }))
                 })
-            }) 
+                it('when sender is not a contract owner', async function () {
+                  await expectThrow(this.AkropolisBaseToken.burn(amount, { from: tokenHolder }))
+                })
+            })
         })
         describe('-MintableToken Tests-', function () {
-            const amount = 10 * 10 ** 18
-            const amountAfterMint = 20 * 10 ** 18
+            const amount = toBN(10 * 10 ** 18)
+            const amountAfterMint = toBN(20 * 10 ** 18)
             const minter = owner
             
             describe('when the sender is the token owner', function () {
@@ -296,7 +301,7 @@ function AkropolisBaseToken_Tests(owner, tokenHolder, otherAccount) {
 
                 it('mints the requested amount', async function () {
                     await this.AkropolisBaseToken.mint(tokenHolder, amount, { from:minter })
-                    assertBalance(this.AkropolisBaseToken, tokenHolder, amountAfterMint)
+                    await assertBalance(this.AkropolisBaseToken, tokenHolder, amountAfterMint)
                     assert((await this.AkropolisBaseToken.totalSupply()).eq(amountAfterMint))
                 })
                 
@@ -320,6 +325,64 @@ function AkropolisBaseToken_Tests(owner, tokenHolder, otherAccount) {
                 it('reverts', async function () {
                     await expectThrow(this.AkropolisBaseToken.mint(tokenHolder, amount, { from:minter }))
                 })
+            })
+
+            describe('mintFinished', function () {
+              beforeEach(async function () {
+                await this.AkropolisBaseToken.mintStarted({ from: owner })
+              })
+
+              it('changes isMintingFinished to true', async function () {
+                await this.AkropolisBaseToken.mintFinished({ from: owner })
+                const isMintingFinished = await this.AkropolisBaseToken.isMintingFinished()
+                assert(isMintingFinished)
+              })
+
+              it('reverts minting when isMintingFinished', async function () {
+                await this.AkropolisBaseToken.mintFinished({ from: owner })
+                await expectThrow(this.AkropolisBaseToken.mint(tokenHolder, amount, { from: owner }))
+              })
+
+              it('reverts if non owner calls', async function () {
+                await expectThrow(this.AkropolisBaseToken.mintFinished({ from: tokenHolder }))
+              })
+
+              it('emits MintFinished event', async function () {
+                const { logs } = await this.AkropolisBaseToken.mintFinished({ from: owner })
+                
+                assert.equal(logs.length, 1)
+                assert.equal(logs[0].event, 'MintFinished')
+              })
+            })
+
+            describe('mintStarted', function () {
+              beforeEach(async function () {
+                await this.AkropolisBaseToken.mintFinished({ from: owner })
+              })
+
+              it('changes isMintingFinished to false', async function () {
+                await this.AkropolisBaseToken.mintStarted({ from: owner })
+                const isMintingFinished = await this.AkropolisBaseToken.isMintingFinished()
+                assert(!isMintingFinished)
+              })
+
+              it('enables minting when isMintingFinished is false', async function () {
+                await this.AkropolisBaseToken.mintStarted({ from: owner })
+                const balanceBeforeMint =  await this.AkropolisBaseToken.balanceOf(tokenHolder)
+                await this.AkropolisBaseToken.mint(tokenHolder, amount, { from: owner })
+                await assertBalance(this.AkropolisBaseToken, tokenHolder, balanceBeforeMint.add(amount))
+              })
+
+              it('reverts if non owner calls', async function () {
+                await expectThrow(this.AkropolisBaseToken.mintStarted({ from: tokenHolder }))
+              })
+
+              it('emits MintStarted event', async function () {
+                const { logs } = await this.AkropolisBaseToken.mintStarted({ from: owner })
+                
+                assert.equal(logs.length, 1)
+                assert.equal(logs[0].event, 'MintStarted')
+              })
             })
         })
         
