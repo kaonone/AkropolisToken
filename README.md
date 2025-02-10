@@ -66,7 +66,7 @@ cd AkropolisToken
   - insert keys into `.env`
 - run truffle migrations:
   - deploy to development `npm run deploy` (make sure Ganache is running)
-  - deploy to live networks `npm run deploy -- --network rinkeby`
+  - deploy to live networks `npm run deploy -- --network rinkeby --f 2`
   - to run all migrations from the beginning use `npm run deploy -- --network rinkeby --reset`
 
 MIT License

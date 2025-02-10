@@ -7,8 +7,6 @@ function TokenProxyTests({
   proxyOwner,
   oldImplAddress,
   amount,
-  blackListedUser,
-  getBackForBlacklist,
 }) {
   describe('--Before upgrade--', function () {
     it('owner of the token proxy is the multisig contract', async function () {
@@ -16,48 +14,17 @@ function TokenProxyTests({
       assert.equal(owner.toLowerCase(), proxyOwner.toLowerCase());
     });
 
-    it("current implementation doesn't support mintStarted method", async function () {
+    it("current implementation doesn't support setNameSymbol method", async function () {
       const currImplementation = await this.proxy.implementation();
       assert.equal(currImplementation.toLowerCase(), oldImplAddress.toLowerCase());
-      await expectThrow(this.oldTokenProxy.mintStarted({ from: proxyOwner }));
+      await expectThrow(this.oldTokenProxy.setNameSymbol('Kaonone', 'KAON', { from: proxyOwner }));
     });
 
-    it('minting reverts because isMintingFinished', async function () {
-      const isMintingFinished = await this.oldTokenProxy.isMintingFinished();
-      assert(isMintingFinished);
-      await expectThrow(this.oldTokenProxy.mint(newUser, amount, { from: proxyOwner }));
-    });
-
-    describe('getBackForBlacklist', function () {
-      before(async function () {
-        await this.oldTokenProxy.addToBlacklist(blackListedUser, { from: proxyOwner });
-      });
-
-      it('black-listed user cannot transfer funds', async function () {
-        await expectThrow(this.oldTokenProxy.transfer(newUser, amount, { from: blackListedUser }));
-      });
-
-      it('getBackForBlacklist method transfers account balances to owner', async function () {
-        const ownerBalance = await this.oldTokenProxy.balanceOf(proxyOwner);
-        const blackListedUserBalance = await this.oldTokenProxy.balanceOf(blackListedUser);
-
-        await getBackForBlacklist(blackListedUser);
-
-        await assertBalance(
-          this.oldTokenProxy,
-          proxyOwner,
-          ownerBalance.add(blackListedUserBalance)
-        );
-        await assertBalance(this.oldTokenProxy, blackListedUser, 0);
-      });
-
-      it('reverts when called for a not black-listed user', async function () {
-        await expectThrow(getBackForBlacklist(tokenHolders[0]));
-      });
-
-      it('reverts when called by not owner', async function () {
-        await expectThrow(getBackForBlacklist(blackListedUser, newUser));
-      });
+    it('current symbol/name is AKRO/Akropolis', async function () {
+      const tokenName = await this.oldTokenProxy.name();
+      const tokenSymbol = await this.oldTokenProxy.symbol();
+      assert.equal(tokenName, 'Akropolis');
+      assert.equal(tokenSymbol, 'AKRO');
     });
   });
 
@@ -218,9 +185,30 @@ function TokenProxyTests({
       });
     });
 
-    describe('getBackForBlacklist', function () {
-      it('method removed from the upgraded contract', async function () {
-        await expectThrow(getBackForBlacklist(blackListedUser));
+    describe('setNameSymbol', function () {
+      before(async function () {
+        const { logs } = await this.newTokenProxy.setNameSymbol('Kaonone', 'KAON', {
+          from: proxyOwner
+        });
+        this.logs = logs;
+      });
+
+      it('setNameSymbol reverts if not owner', async function () {
+        await expectThrow(this.newTokenProxy.setNameSymbol('Kaonone2', 'KAON2', {
+          from: newUser
+        }));
+      });
+
+      it('name/symbol changed', async function () {
+        const tokenName = await this.newTokenProxy.name();
+        const tokenSymbol = await this.newTokenProxy.symbol();
+        assert.equal(tokenName, 'Kaonone');
+        assert.equal(tokenSymbol, 'KAON');
+      });
+
+      it('emits NameSymbolChanged event', function () {
+        assert.equal(this.logs.length, 1);
+        assert.equal(this.logs[0].event, 'NameSymbolChanged');
       });
     });
   });

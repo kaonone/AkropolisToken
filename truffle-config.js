@@ -22,38 +22,39 @@ module.exports = {
     mainnet: {
       provider: function () {
         return new HDWalletProvider(
-          process.env.METAMASK_MNEMONIC,
-          'https://mainnet.infura.io/v3/' + process.env.INFURA_API_KEY,
+          process.env.DEPLOYER_PRIVATE_KEY,
+          process.env.MAINNET_RPC_URL,
           0
         );
       },
       network_id: 1,
-      gasPrice: 35000000000,
+      gasPrice: 1318000000,
       gas: 6000000,
       skipDryRun: true,
     },
 
-    kovan: {
+    tenderly: {
       provider: function () {
         return new HDWalletProvider(
-          process.env.METAMASK_MNEMONIC,
-          'https://kovan.infura.io/v3/' + process.env.INFURA_API_KEY
+          process.env.DEPLOYER_PRIVATE_KEY,
+          process.env.MAINNET_RPC_URL,
+          0
         );
       },
-      network_id: 42,
-      gas: 7000000,
+      network_id: 1,
+      gasPrice: 1318000000,
+      gas: 6000000,
+      skipDryRun: true,
     },
 
-    rinkeby: {
+    sepolia: {
       provider: function () {
         return new HDWalletProvider(
-          process.env.METAMASK_MNEMONIC,
-          'https://rinkeby.infura.io/v3/' + process.env.INFURA_API_KEY,
-          0,
-          2
+          process.env.DEPLOYER_PRIVATE_KEY,
+          process.env.SEPOLIA_RPC_URL
         );
       },
-      network_id: 4,
+      network_id: 11155111,
       gasPrice: 3000000000,
       gas: 7000000,
     },

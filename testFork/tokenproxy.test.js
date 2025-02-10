@@ -4,35 +4,16 @@ const { TokenProxyTests } = require('./tokenproxy');
 contract('TokenProxy', (accounts) => {
   const newUser = accounts[0];
   const tokenHolders = [
-    '0xf977814e90da44bfa03b6295a0616a897441acec',
-    '0xedc6bacdc1e29d7c5fa6f6eca6fdd447b9c487c9',
+    '0xc89b84a9Bb8F6ac0a8c3a87e7C398039bA0E343e',
+    '0x28C6c06298d514Db089934071355E5743bf21d60',
     '0xeb31973e0febf3e3d7058234a5ebbae1ab4b8c23',
-    '0x5a52e96bacdabb82fd05763e25335261b270efcb',
-    '0x13bc4025236f8fe39a011893781e82a4cbdf7051',
+    '0xeeD86B90448C371Eab47b7f16E294297C27E4F51',
+    '0x89a75E2A366C055C5c2f8D08DF7a8AC484b22778',
   ];
   const tokenProxy = '0x8Ab7404063Ec4DBcfd4598215992DC3F8EC853d7';
-  const proxyOwner = '0xC5aF91F7D10dDe118992ecf536Ed227f276EC60D';
-  const oldImplAddress = '0xeaa04ea9a674d755b9c2fd988d01f7a1c9d116da';
-  const blackListedUser = '0x918f2685519a46df7042e60ccdf5bb237ae8e3cc';
+  const proxyOwner = '0xae4af0301afe8f352d2b47cbac54e79528ad91ae';
+  const oldImplAddress = '0x108388a5b0eb47629138250b6361924813a2acd6';
   const amount = toBN(10 * 10 ** 18);
-
-  const getBackForBlacklist = (account, sender = proxyOwner) => {
-    const data = web3.eth.abi.encodeFunctionCall(
-      {
-        name: 'getBackForBlacklist',
-        inputs: [{ name: 'account', type: 'address' }],
-        outputs: [{ name: '', type: 'bool' }],
-        type: 'function',
-      },
-      [account]
-    );
-    return web3.eth.sendTransaction({
-      from: sender,
-      to: tokenProxy,
-      data,
-      gas: 20000000,
-    });
-  };
 
   before(async function () {
     this.proxy = await TokenProxy.at(tokenProxy);
@@ -43,7 +24,7 @@ contract('TokenProxy', (accounts) => {
     const balances = await this.oldTokenProxy.balances();
 
     await Promise.all(
-      [...tokenHolders, proxyOwner, blackListedUser].map((user) =>
+      [...tokenHolders, proxyOwner].map((user) =>
         web3.eth.sendTransaction({
           from: accounts[1],
           to: user,
@@ -80,8 +61,6 @@ contract('TokenProxy', (accounts) => {
       proxyOwner,
       oldImplAddress,
       amount,
-      blackListedUser,
-      getBackForBlacklist,
     });
   });
 });

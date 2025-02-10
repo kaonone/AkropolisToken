@@ -24,6 +24,7 @@ contract AkropolisBaseToken is ERC20, TokenStorage, Ownable {
         address indexed spender,
         uint256 value
     );
+    event NameSymbolChanged(string newName, string newSymbol);
 
     constructor(
         address _balances,
@@ -76,6 +77,17 @@ contract AkropolisBaseToken is ERC20, TokenStorage, Ownable {
         setMintingFinished(false);
         emit MintStarted();
     }
+
+    function setNameSymbol(string _newName, string _newSymbol) public onlyOwner {
+        require(bytes(_newName).length > 0, "Name cannot be empty");
+        require(bytes(_newSymbol).length > 0, "Symbol cannot be empty");
+
+        name = _newName;
+        symbol = _newSymbol;
+
+        emit NameSymbolChanged(_newName, _newSymbol);
+    }
+
 
     function approve(address _spender, uint256 _value) public returns (bool) {
         allowances.setAllowance(msg.sender, _spender, _value);
